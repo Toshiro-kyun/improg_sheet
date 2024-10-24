@@ -55,24 +55,32 @@
       return True
     
 #Function that determines if a number is a nested prime:
-def is_prime(n):
-    if n <= 1:
-        return False
-    for i in range(2, int(n**0.5) + 1):
-        if n % i == 0:
-            return False
-    return True
+  def is_prime(n):
+      if n <= 1:
+          return False
+      for i in range(2, int(n**0.5) + 1):
+          if n % i == 0:
+              return False
+      return True
 
-def nested_prime(number):
-    count = len(str(number)) 
-    i = 0
-    while i != count:
-        if is_prime(number/10**i):
-            i += 1
-        else:
-            return False
+  def nested_prime(number):
+      count = len(str(number)) 
+      i = 0
+      while i != count:
+          if is_prime(number/10**i):
+              i += 1
+          else:
+              return False
         
     return True
+#Function that recursively determines if a word is a palindrome:
+  def recursive_palindrome(word):
+      if len(word) < 2:
+          return True
+      if word[0] == word[-1]:
+          return recursive_palindrome(word[1:-1])
+      
+      return False
 #Extra:
 
 
