@@ -73,6 +73,7 @@
               return False
         
     return True
+
 #Function that recursively determines if a word is a palindrome:
   def recursive_palindrome(word):
       if len(word) < 2:
