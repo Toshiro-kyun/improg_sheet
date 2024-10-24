@@ -1,4 +1,4 @@
-# Summary of Programming Code for Imperative Programming Course for BSc Articificial Intelligence
+# Summary of Programming Code for Imperative Programming Course for BSc Artificial Intelligence
 # Feel free to commit/edit this document
 
 #General Info:
