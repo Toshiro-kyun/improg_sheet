@@ -83,7 +83,7 @@
       
       return False
     
-#Function that determines whether two lists are permutations of each other (a bit cheekky, but works nonetheless):
+#Function that determines whether two lists are permutations of each other (a bit cheeky, but works nonetheless):
   def is_permutation(a, b):
       if sorted(a) == sorted(b):
           return True
