@@ -89,7 +89,18 @@
           return True
       else:
           return False
-        
+
+#Function that determines the highest number in a list recursively:
+  def find_max(lst):
+    if len(lst) == 1:
+      return lst[0]
+      
+    max_value = find_max(lst[1:])
+    if lst[0] > max_value:
+      return lst[0]
+    else:
+      return max_value
+    
 #Extra:
 
 
