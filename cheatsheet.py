@@ -100,7 +100,11 @@
       return lst[0]
     else:
       return max_value
-    
+
+#Function that reverses a list or string:
+  def reverse(item):
+    return item[::-1]
+
 #Extra:
 
 
