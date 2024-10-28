@@ -7,7 +7,6 @@
 #Lecture code:
 
 #General functions:
-
   #Function that reverses a list or string:
     def reverse(item):
       return item[::-1]
@@ -112,6 +111,21 @@
     else:
       return max_value
 
+#Function to do the Tower of Hanoi:
+  def tower_hanoi(n, a, b, c):
+    #N = number of disks
+    #A = Current pole
+    #B = Auxillary pole
+    #C = Destination
+
+    if n == 1:
+      return print("Move 1st disk from ", a, " to ", b)
+    tower_hanoi(n - 1, a, c, b)
+    print("Move ", n, "the disk from ", a, " to ", c)
+    tower_hanoi(n - 1, b, a, c)
+
+
+      
 #Extra:
 
 
