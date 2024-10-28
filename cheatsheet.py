@@ -3,33 +3,44 @@
 
 #General Info:
 #some very important info about slicing
+
 #Lecture code:
 
-#Assignment code:
+#General functions:
+
+  #Function that reverses a list or string:
+    def reverse(item):
+      return item[::-1]
+      
+  #Function that checks if a number is a prime:
+    def check_prime(number):
+      if number < 2:
+        return False
+        
+      i = 2
+      while i*i <= number:
+        if number % i == 0:
+          return False
+        i += 1
+          
+      return True
+    
   #Function that determines whether a number is divisble by each of its digits:
-    def digit_divisible(number):
-    for i in number:
-        try:
-            i = int(i)
-            if int(number) % i != 0:
-                return False
-        except ZeroDivisionError:
-            pass
+    def digit_divisible(number: int):
+      for i in str(number):
+        if number % int(I) != 0:
+            return False
         else:
             return True
 
  #Function determining the number of solutions of a given quadratic equation:
-    import math
     def number_of_quadratic_solutions(a,b,c):
-      number = 0
       if b**2-4*a*c == 0:
-          number += 1
-          return(number)
+        return 1
       elif b**2-4*a*c>0:
-          number +=2
-          return(number)
+        return 2
       elif b**2-4*a*c<0:
-          return(number)
+        return 0
       
 #Function that recursively exponentiates a number to a given power:
   def exponentiation(a,b):
@@ -100,10 +111,6 @@
       return lst[0]
     else:
       return max_value
-
-#Function that reverses a list or string:
-  def reverse(item):
-    return item[::-1]
 
 #Extra:
 
