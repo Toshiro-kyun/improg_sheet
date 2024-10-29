@@ -85,7 +85,23 @@ lst.remove(x) #-> Remove first occurance of "x" in list
 lst.reverse(x) #-> Reverse order of list
 lst.sort(x) #-> Sort list
 
-#some very important info about slicing
+#Dictionary methods- dictionary = dct:
+dct.clear() #-> Remove all element from original dictionary
+dct.copy() #-> Returns copy of original dictionary
+dct.fromkeys(x, y) #-> Returns a dictionary with specificied keys and values
+  #  x can be string/list/tuple and wil be the keys
+  #  y can be string/list/tuple and wil be the values
+  # Each key is matched to the value
+dct.get(key) #-> Returns value of specificied key
+dct.items() #-> Returns list of tuples with format (key, value)
+dct.keys() #-> Returns list with all dictionary keys
+dct.pop(key) #-> Removes key-value pair that has key "key"
+dct.popitem() #-> Removes last inserted key-value pair
+dct.setdefault(key, value) #-> Returns value of specified key, if key does not exist: insert key with specified value
+dct.update(x) #-> Add key-value pair to dictionary, Input: list/tuple/set
+dct.values(x) #-> Returns list of all values of dictionary
+
+#some very important info about slicing 
 
 """
 Lecture code:
