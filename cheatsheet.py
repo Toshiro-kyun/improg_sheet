@@ -13,7 +13,6 @@ Lecture code:
 """
 
   #Week 6: 
-
     #Parser:
     def parser():
         alphabet = "abcdefghijklmnopqrstuvwxyz"
