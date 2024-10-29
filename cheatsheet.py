@@ -1,10 +1,16 @@
-# Summary of Programming Code for Imperative Programming Course for BSc Artificial Intelligence
-# Feel free to commit/edit this document
+"""
+Summary of Programming Code for Imperative Programming Course for BSc Artificial Intelligence
+Feel free to commit/edit this document
+"""
 
-#General Info:
+"""
+General Info:
+"""
 #some very important info about slicing
 
-#Lecture code:
+"""
+Lecture code:
+"""
 
   #Week 6: 
 
@@ -30,7 +36,10 @@
             print(alphabet[number], end="")
         print()
 
-#General functions:
+"""
+General functions:
+"""
+
   #Function that reverses a list or string:
     def reverse(item):
       return item[::-1]
