@@ -6,6 +6,30 @@
 
 #Lecture code:
 
+  #Week 6: 
+
+    #Parser:
+    def parser():
+        alphabet = "abcdefghijklmnopqrstuvwxyz"
+        register = [alphabet.find(letter) for letter in input()]
+        instructions = input()
+        
+        position = 0
+        for instruction in instructions:
+            if instruction == "<":
+                position = (position + len(register) - 1) % len(register)
+            if instruction == ">":
+                position = (position + 1) % len(register)
+            if instruction == "*":
+                register[position] = (register[position] + register[(position + 1) % len(register)]) % len(alphabet)
+            if instruction == "+":
+                register[position] = (register[position] + 1) % len(alphabet)
+            if instruction == "-":
+                register[position] = (register[position] + len(alphabet) - 1) % len(alphabet)
+        for number in register:
+            print(alphabet[number], end="")
+        print()
+
 #General functions:
   #Function that reverses a list or string:
     def reverse(item):
