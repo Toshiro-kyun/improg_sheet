@@ -38,6 +38,17 @@ sum() #-> Sums all objects in list/dict/tuple/set --> With dict: sum keys
 tuple() #-> Returns tuple --> Input: list/dict/tuple/set
 type() #-> Returns type of input
 
+#String methods - str = string:
+str.capitalize() #-> Convert first character to uppercase
+str.casefold() #-> Convert string to lower case
+str.count(x) #-> Count how many times substring "x" occurs in string
+str.endswith(x) #-> Returns whether string ends with substring "x"
+str.find(x) #-> Returns index of first occurance of "x" in string, if no match --> return -1
+str.format(x) #-> More info below
+str.index(x) #-> Returns index of first occurance of "x" in string, if no match --> Error
+str.isalnum() #-> Returns True if all characters in string are alphabetic letters or numbers
+str.isalpha() #-> Returns True if all characters in string are alphabetic
+str.isascii() #-> Returns True if all characters in string are ascii characters
 #some very important info about slicing
 
 """
