@@ -49,6 +49,29 @@ str.index(x) #-> Returns index of first occurance of "x" in string, if no match 
 str.isalnum() #-> Returns True if all characters in string are alphabetic letters or numbers
 str.isalpha() #-> Returns True if all characters in string are alphabetic
 str.isascii() #-> Returns True if all characters in string are ascii characters
+str.isdecimal() #-> Returns True if all characters in string are decimals
+str.isdigit() #-> Returns True if all characters in string are digits
+str.islower() #-> Returns True if all characters in string are lower case
+str.isnumeric() #-> Returns True if all characters in string are numeric (digits, exponents, fractions)
+str.isspace() #-> Returns True if all characters in string are whitespace
+str.isupper() #-> Returns True if all characters in string are upper case
+"x".join(lst) #-> Join all elements in list/dict/tuple/set and separate them with x --> Note that lst must only have strings and for dict, keys are considered
+str.lower() #-> Convert string to lowercase
+str.lstrip() #-> Remove any whitespaces in front
+str.partition(x) #-> Return tuple with format (everything before x, x, everything after x) for first occurance of x
+str.replace(a, b, n) #-> Replace the first n occurances of a in str with b --> Deafult of n = 0
+str.rfind(x) #-> Returns last occurance of x in string --> Return -1 if not found
+str.rindex(x) #-> Returns last occurance of x in string --> Error if not found
+str.rpartition(x) #-> Return tuple with format (everything before x, x, everything after x) for last occurance of x
+str.rstrip() #-> Remove all whitespaces at the end
+str.split(x) #-> Split string at each occurance of x into list --> Default of x is " " (whitespace)
+str.startswith(x) #-> Returns True when string starts with x
+str.strip() #-> Remove all whitespaces at beginning or end of string
+str.swapcase() #-> Lowercase of string become uppercase and vice versa
+str.upper() #-> Convert string into uppercase
+
+
+
 #some very important info about slicing
 
 """
