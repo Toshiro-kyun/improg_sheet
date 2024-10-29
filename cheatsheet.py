@@ -6,6 +6,38 @@ Feel free to commit/edit this document
 """
 General Info:
 """
+#Built in functions:
+abs() #-> Returns absolute value of a number
+all() #-> Return True if all items in an iterable object are true
+any() #-> Return True if any item in an iterable object is true
+bin() #-> Return the binary version of a number
+bool() #- Returns boolean value of specified object
+chr() #-> Returns character from Ascii --> Input: int, output: str
+dict() #-> Returns dictionary --> Input: key = value, output: dict
+enumerate() #-> Returns tuple with format (index, element) --> Input: list/dict/set/tuple, output: (index, element) --> Note for dict element = key
+eval() #-> Evaluates expression
+float() #-> Convert into float
+format() #-> Format code (More info below)
+hex() #-> Convert into hexadecimal
+input() #-> Ask for user input
+int() #-> Convert to integer (negatives allowed)
+len() #-> Return length of list/dict/set/tuple
+list() #-> Returns list, for example putting each char of a string into a list
+max() #-> Returns largest item --> input: items separated by commas, or list/dict/set/tuple --> Note for dict: item = key
+min() #-> Returns smallest item --> input: items separated by commas, or list/dict/set/tuple --> Note for dict: item = key
+ord() #-> Convert character into number in Ascii --> Input: str, output: int
+pow(x, y) #-> Returns x to the power of y (x^y) 
+print() #-> Print function
+range(start, end, step) #-> Returns list of numbers, starting and including "start" till excluding "end" with increments of size "step"
+  #--> Defaults: Start = 0, step = 1
+reversed() #-> Returns reversed iterator, input: list/dict/tuple/set
+set() #-> Create new set
+slice(start, end, step) #-> Returns slice object (Might be confusing, use normal slicing with [])
+sorted() #-> Returns sorted list/dict/tuple/set --> With dict: sort keys
+sum() #-> Sums all objects in list/dict/tuple/set --> With dict: sum keys
+tuple() #-> Returns tuple --> Input: list/dict/tuple/set
+type() #-> Returns type of input
+
 #some very important info about slicing
 
 """
