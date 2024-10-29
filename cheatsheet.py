@@ -56,6 +56,77 @@ def slice_string():
     return [0 if x % 2 == 0 else 0 for x in lst]
 
 """
+Methods on how to solve the multiple choice questions:
+
+There are two forms of these questions, the ones that ask you to find the process in which you find the answer and the ones that ask you
+to follow a certain path of instructions and then you give the answer.
+
+Both can generally be solved with this method (If your question is type two, just follow the instrucitons they give you and compare the answers)
+1. Write out the initial values of X and of Y (This is shown in the first line of the question)
+    These should have a subscript of 0 meaning that they are X_0 and Y_0 (X with a tiny 0 underneath and Y_0)
+2. Write out the final answer the question is trying to get from you (Second line of the question)
+
+3. There is a few rules that you should follow to know if each one is correct or wrong.
+  1. Firstly, each time you do an instruction, you change the subscript of the variable you are editing to the current instruciton number
+  2. After an instruciton is carried out, you must take that new value as the current one for that given variable
+  3. Repeat untill all instructions are done for each one of the options (A, B and C) or untill the instructions given are done
+  4. If for any of them the final values of the variables are the same as the final answer, then that option is correct.
+
+There are some exceptions to this method that have to be understood so that it works correctly:
+If the answer requires you to give the answer in the form constant = variable + variable or something along those lines, you have to
+substitue the values that you got for your variables at the end and then confirm. You may also have to rearrange the answer to get 
+it in the requested form.
+
+Dont be scared of squared, and 1/2, usually (if the answer is correct) they will cancel eachother out or resolve somehow.
+
+Sometimes you have to take things analytically, for example, if you see x+y=A and the first instruction is X=X+Y, then you 
+are correct to assume that X=A
+  
+-----------------------------------------------------------------------
+Lets go over a simple example:
+We get the following question:
+/* x == A, y == B */
+/* x == 2*A + 2*B, y == B - A */
+
+(a) x = 2*x + 2*y; y = y - x
+(b) y = y - x; x = 4*x + 2*y
+(c) x = 2*x + 2*y; y = (x - y)/2
+
+Firstly we write on our scrap paper:
+X_0 == A      Y_0 == B  / X==2A+2B    Y==B-A (Now we know our initial conditions and the final values to be obtained)
+
+Then we start with A:
+Option A:
+(The first instruction tells us that the new value of X should be 2*x + 2*y so we write out:)
+X_1=2X_0 + 2Y_0 ---> X_1= 2A+2B (We use the initial values of X and Y to create the new value of X)
+
+(From now onwards, our value of X will be X_1 untill edited again)
+
+The next instruction tells us that (Y = Y - x) so we write out:
+Y_2 = Y_0 - X_1 --> Y_2 = B - (2A + 2B) --> Y_2 = -B-2A
+
+We have reached the end of our instructions so that means that we have to compare the final values of Y and X obtained
+In this case, the final values of X and Y are X_1 and Y_2 now, X_1 does equal to the final answer but Y_2 dosent
+So we move on to the next option, option B:
+
+Option B:
+(First instruciton tells us that y = y - x so we write out:)
+Y_1 = Y_0 - X_0 --> Y_1 = B-A
+
+Now we go onto the next instruction, x = 4*x + 2*y, so we write out:
+X_2 = 4X_0 + 2Y_1 --> X_2 = 4A + 2B - 2A --> X_2 = 2A + 2B
+
+Thats the end of the instructions. We can see that X_2 is the same as the X final answer and Y_1 is the same as the final Y answer.
+Therefore, option B is correct
+
+Hopefullt this helps clear out some stuff, if you are reading this during the exam, best of luck!
+If you are reading this before the exam and dont understand how the method works, contact ricardo@rubert.es
+---------------------------------------------------------------
+"""
+
+
+
+"""
 Lecture code:
 """
 
@@ -311,8 +382,6 @@ def dictionary_methods():
 def tuple_methods():
   tpl.count(x) #-> Returns number of times "x" occurs in tuple
   tpl.index(x) #-> Returns index of first occurance of "x" in tuple --> Error if not found
-
-
 
 
 
