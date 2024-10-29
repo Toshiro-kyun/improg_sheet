@@ -70,7 +70,20 @@ str.strip() #-> Remove all whitespaces at beginning or end of string
 str.swapcase() #-> Lowercase of string become uppercase and vice versa
 str.upper() #-> Convert string into uppercase
 
+#List methods - list = lst:
+# !!!Note that unless "Returns" is included, the methods do not return any value but modify the original list !!
 
+lst.append(x) #-> Add x at the end of original list --> Only 1 input allowed
+lst.clear() #-> Remove all element in original list
+lst.copy() #-> Returns copy of original list
+lst.count(x) #-> Returns number of occurances of x in list 
+lst.extend(lst2) #-> Add all element in lst2 (the second list) to the end of lst
+lst.index(x) #-> Returns index of first occurance of "x" --> Not found returns Error
+lst.insert(position, element) #-> Inserts "element" into original list at index "position". So index of "element" within lst becomes "position"
+lst.pop(x) #-> Removes element at index "x", default x is -1 (last item)
+lst.remove(x) #-> Remove first occurance of "x" in list
+lst.reverse(x) #-> Reverse order of list
+lst.sort(x) #-> Sort list
 
 #some very important info about slicing
 
