@@ -2,11 +2,58 @@
 Summary of Programming Code for Imperative Programming Course for BSc Artificial Intelligence
 Feel free to commit/edit this document
 """
-
+print("Hello World!")
 """
 General Info:
 """
+#List/string slicing:
+def slice_string():
+  obj[start:end:step] 
+  
+# Any of these can be excluded, but use ":" to indicate
+# Return the same type (string/list) from and including "start" till but excluding "end" with a stepsize of "step"
+# Start and end must be within the length of the object
+# Examples:
+  
+  def examples():
+    string = "helloWorld"
+    string[1:] #--> "elloWorld"
+    string[:5] #--> "hello"
+    string[1:3] #--> "el"
+    string[1:8:2] #--> elWr
+    string[::-1] #--> dlroWolleh
 
+#Accessing items in string/list/dict/tuples:
+  # !! Remember that indexing starts at 0 and ends at (len(obj) - 1) !!
+  def access():
+    obj[index] #-> Returns item at index "index" --> Used for strings, list, tuples
+    obj[key] #-> Returns value associated with "key" in dictionary
+
+#Changing items in list/dict:
+  def change():
+    obj[index] = new_value #-> Makes the value of the element at index "index" in list "obj" equal to "new_value"
+    obj[key] = new_value #->  Makes the value of the value of pair with key "key" in dict "obj" equal to "new_value" 
+
+#Add 2 lists:
+  def add():
+    list1 = [1]
+    list2 = [2]
+    return list1 + list2 #-> Returns [1, 2]
+
+#List comprehension:
+# Easier to demonstrate with an example
+# Suppose we want to convert all elements to strings:
+  def list_convert_str():
+    lst = [1, 2, 3, 4, 5, 6]
+    return [str(x) for x in lst]
+#Suppose we want to only return elements that are even:
+  def sort_even():
+    lst = [1, 2, 3, 4, 5, 6]
+    return [x for x in lst if x % 2 == 0]
+#Suppose we want to return, 0 if it is even and 1 if an element is odd 
+  def one_odd_zero_even():
+      lst = [1, 2, 3, 4, 5, 6]
+    return [0 if x % 2 == 0 else 0 for x in lst]
 
 """
 Lecture code:
@@ -164,101 +211,106 @@ Methods
 """
 
 #Built in functions:
-abs() #-> Returns absolute value of a number
-all() #-> Return True if all items in an iterable object are true
-any() #-> Return True if any item in an iterable object is true
-bin() #-> Return the binary version of a number
-bool() #- Returns boolean value of specified object
-chr() #-> Returns character from Ascii --> Input: int, output: str
-dict() #-> Returns dictionary --> Input: key = value, output: dict
-enumerate() #-> Returns tuple with format (index, element) --> Input: list/dict/set/tuple, output: (index, element) --> Note for dict element = key
-eval() #-> Evaluates expression
-float() #-> Convert into float
-format() #-> Format code (More info below)
-hex() #-> Convert into hexadecimal
-input() #-> Ask for user input
-int() #-> Convert to integer (negatives allowed)
-len() #-> Return length of list/dict/set/tuple
-list() #-> Returns list, for example putting each char of a string into a list
-max() #-> Returns largest item --> input: items separated by commas, or list/dict/set/tuple --> Note for dict: item = key
-min() #-> Returns smallest item --> input: items separated by commas, or list/dict/set/tuple --> Note for dict: item = key
-ord() #-> Convert character into number in Ascii --> Input: str, output: int
-pow(x, y) #-> Returns x to the power of y (x^y) 
-print() #-> Print function
-range(start, end, step) #-> Returns list of numbers, starting and including "start" till excluding "end" with increments of size "step"
-  #--> Defaults: Start = 0, step = 1
-reversed() #-> Returns reversed iterator, input: list/dict/tuple/set
-set() #-> Create new set
-slice(start, end, step) #-> Returns slice object (Might be confusing, use normal slicing with [])
-sorted() #-> Returns sorted list/dict/tuple/set --> With dict: sort keys
-sum() #-> Sums all objects in list/dict/tuple/set --> With dict: sum keys
-tuple() #-> Returns tuple --> Input: list/dict/tuple/set
-type() #-> Returns type of input
+def built_functions():
+  abs() #-> Returns absolute value of a number
+  all() #-> Return True if all items in an iterable object are true
+  any() #-> Return True if any item in an iterable object is true
+  bin() #-> Return the binary version of a number
+  bool() #- Returns boolean value of specified object
+  chr() #-> Returns character from Ascii --> Input: int, output: str
+  dict() #-> Returns dictionary --> Input: key = value, output: dict
+  enumerate() #-> Returns tuple with format (index, element) --> Input: list/dict/set/tuple, output: (index, element) --> Note for dict element = key
+  eval() #-> Evaluates expression
+  float() #-> Convert into float
+  format() #-> Format code (More info below)
+  hex() #-> Convert into hexadecimal
+  input() #-> Ask for user input
+  int() #-> Convert to integer (negatives allowed)
+  len() #-> Return length of list/dict/set/tuple
+  list() #-> Returns list, for example putting each char of a string into a list
+  max() #-> Returns largest item --> input: items separated by commas, or list/dict/set/tuple --> Note for dict: item = key
+  min() #-> Returns smallest item --> input: items separated by commas, or list/dict/set/tuple --> Note for dict: item = key
+  ord() #-> Convert character into number in Ascii --> Input: str, output: int
+  pow(x, y) #-> Returns x to the power of y (x^y) 
+  print() #-> Print function
+  range(start, end, step) #-> Returns list of numbers, starting and including "start" till excluding "end" with increments of size "step"
+    #--> Defaults: Start = 0, step = 1
+  reversed() #-> Returns reversed iterator, input: list/dict/tuple/set
+  set() #-> Create new set
+  slice(start, end, step) #-> Returns slice object (Might be confusing, use normal slicing with [])
+  sorted() #-> Returns sorted list/dict/tuple/set --> With dict: sort keys
+  sum() #-> Sums all objects in list/dict/tuple/set --> With dict: sum keys
+  tuple() #-> Returns tuple --> Input: list/dict/tuple/set
+  type() #-> Returns type of input
 
 #String methods - str = string:
-str.capitalize() #-> Convert first character to uppercase
-str.casefold() #-> Convert string to lower case
-str.count(x) #-> Count how many times substring "x" occurs in string
-str.endswith(x) #-> Returns whether string ends with substring "x"
-str.find(x) #-> Returns index of first occurance of "x" in string, if no match --> return -1
-str.format(x) #-> More info below
-str.index(x) #-> Returns index of first occurance of "x" in string, if no match --> Error
-str.isalnum() #-> Returns True if all characters in string are alphabetic letters or numbers
-str.isalpha() #-> Returns True if all characters in string are alphabetic
-str.isascii() #-> Returns True if all characters in string are ascii characters
-str.isdecimal() #-> Returns True if all characters in string are decimals
-str.isdigit() #-> Returns True if all characters in string are digits
-str.islower() #-> Returns True if all characters in string are lower case
-str.isnumeric() #-> Returns True if all characters in string are numeric (digits, exponents, fractions)
-str.isspace() #-> Returns True if all characters in string are whitespace
-str.isupper() #-> Returns True if all characters in string are upper case
-"x".join(lst) #-> Join all elements in list/dict/tuple/set and separate them with x --> Note that lst must only have strings and for dict, keys are considered
-str.lower() #-> Convert string to lowercase
-str.lstrip() #-> Remove any whitespaces in front
-str.partition(x) #-> Return tuple with format (everything before x, x, everything after x) for first occurance of x
-str.replace(a, b, n) #-> Replace the first n occurances of a in str with b --> Deafult of n = 0
-str.rfind(x) #-> Returns last occurance of x in string --> Return -1 if not found
-str.rindex(x) #-> Returns last occurance of x in string --> Error if not found
-str.rpartition(x) #-> Return tuple with format (everything before x, x, everything after x) for last occurance of x
-str.rstrip() #-> Remove all whitespaces at the end
-str.split(x) #-> Split string at each occurance of x into list --> Default of x is " " (whitespace)
-str.startswith(x) #-> Returns True when string starts with x
-str.strip() #-> Remove all whitespaces at beginning or end of string
-str.swapcase() #-> Lowercase of string become uppercase and vice versa
-str.upper() #-> Convert string into uppercase
+def string_methods():
+  str.capitalize() #-> Convert first character to uppercase
+  str.casefold() #-> Convert string to lower case
+  str.count(x) #-> Count how many times substring "x" occurs in string
+  str.endswith(x) #-> Returns whether string ends with substring "x"
+  str.find(x) #-> Returns index of first occurance of "x" in string, if no match --> return -1
+  str.format(x) #-> More info below
+  str.index(x) #-> Returns index of first occurance of "x" in string, if no match --> Error
+  str.isalnum() #-> Returns True if all characters in string are alphabetic letters or numbers
+  str.isalpha() #-> Returns True if all characters in string are alphabetic
+  str.isascii() #-> Returns True if all characters in string are ascii characters
+  str.isdecimal() #-> Returns True if all characters in string are decimals
+  str.isdigit() #-> Returns True if all characters in string are digits
+  str.islower() #-> Returns True if all characters in string are lower case
+  str.isnumeric() #-> Returns True if all characters in string are numeric (digits, exponents, fractions)
+  str.isspace() #-> Returns True if all characters in string are whitespace
+  str.isupper() #-> Returns True if all characters in string are upper case
+  "x".join(lst) #-> Join all elements in list/dict/tuple/set and separate them with x --> Note that lst must only have strings and for dict, keys are considered
+  str.lower() #-> Convert string to lowercase
+  str.lstrip() #-> Remove any whitespaces in front
+  str.partition(x) #-> Return tuple with format (everything before x, x, everything after x) for first occurance of x
+  str.replace(a, b, n) #-> Replace the first n occurances of a in str with b --> Deafult of n = 0
+  str.rfind(x) #-> Returns last occurance of x in string --> Return -1 if not found
+  str.rindex(x) #-> Returns last occurance of x in string --> Error if not found
+  str.rpartition(x) #-> Return tuple with format (everything before x, x, everything after x) for last occurance of x
+  str.rstrip() #-> Remove all whitespaces at the end
+  str.split(x) #-> Split string at each occurance of x into list --> Default of x is " " (whitespace)
+  str.startswith(x) #-> Returns True when string starts with x
+  str.strip() #-> Remove all whitespaces at beginning or end of string
+  str.swapcase() #-> Lowercase of string become uppercase and vice versa
+  str.upper() #-> Convert string into uppercase
 
-#List methods - list = lst:
-lst.append(x) #-> Add x at the end of original list --> Only 1 input allowed
-lst.clear() #-> Remove all element in original list
-lst.copy() #-> Returns copy of original list
-lst.count(x) #-> Returns number of occurances of x in list 
-lst.extend(lst2) #-> Add all element in lst2 (the second list) to the end of lst
-lst.index(x) #-> Returns index of first occurance of "x" --> Not found returns Error
-lst.insert(position, element) #-> Inserts "element" into original list at index "position". So index of "element" within lst becomes "position"
-lst.pop(x) #-> Removes element at index "x", default x is -1 (last item)
-lst.remove(x) #-> Remove first occurance of "x" in list
-lst.reverse(x) #-> Reverse order of list
-lst.sort(x) #-> Sort list
+#List methods - list = last:
+def list_methods:
+  lst.append(x) #-> Add x at the end of original list --> Only 1 input allowed
+  lst.clear() #-> Remove all element in original list
+  lst.copy() #-> Returns copy of original list
+  lst.count(x) #-> Returns number of occurances of x in list 
+  lst.extend(lst2) #-> Add all element in lst2 (the second list) to the end of lst
+  lst.index(x) #-> Returns index of first occurance of "x" --> Not found returns Error
+  lst.insert(position, element) #-> Inserts "element" into original list at index "position". So index of "element" within lst becomes "position"
+  lst.pop(x) #-> Removes element at index "x", default x is -1 (last item)
+  lst.remove(x) #-> Remove first occurance of "x" in list
+  lst.reverse(x) #-> Reverse order of list
+  lst.sort(x) #-> Sort list
 
 #Dictionary methods- dictionary = dct:
-dct.clear() #-> Remove all element from original dictionary
-dct.copy() #-> Returns copy of original dictionary
-dct.fromkeys(x, y) #-> Returns a dictionary with specificied keys and values
-  #  x can be string/list/tuple and wil be the keys
-  #  y can be string/list/tuple and wil be the values
-  # Each key is matched to the value
-dct.get(key) #-> Returns value of specificied key
-dct.items() #-> Returns list of tuples with format (key, value)
-dct.keys() #-> Returns list with all dictionary keys
-dct.pop(key) #-> Removes key-value pair that has key "key"
-dct.popitem() #-> Removes last inserted key-value pair
-dct.setdefault(key, value) #-> Returns value of specified key, if key does not exist: insert key with specified value
-dct.update(x) #-> Add key-value pair to dictionary, Input: list/tuple/set
-dct.values(x) #-> Returns list of all values of dictionary
+def dictionary_methods():
+  dct.clear() #-> Remove all element from original dictionary
+  dct.copy() #-> Returns copy of original dictionary
+  dct.fromkeys(x, y) #-> Returns a dictionary with specificied keys and values
+    #  x can be string/list/tuple and wil be the keys
+    #  y can be string/list/tuple and wil be the values
+    # Each key is matched to the value
+  dct.get(key) #-> Returns value of specificied key
+  dct.items() #-> Returns list of tuples with format (key, value)
+  dct.keys() #-> Returns list with all dictionary keys
+  dct.pop(key) #-> Removes key-value pair that has key "key"
+  dct.popitem() #-> Removes last inserted key-value pair
+  dct.setdefault(key, value) #-> Returns value of specified key, if key does not exist: insert key with specified value
+  dct.update(x) #-> Add key-value pair to dictionary, Input: list/tuple/set
+  dct.values(x) #-> Returns list of all values of dictionary
 
 #Tuple methods - tuple = tpl:
-tpl.count(x) #-> Returns number of times "x" occurs in tuple
-tpl.index(x) #-> Returns index of first occurance of "x" in tuple --> Error if not found
+def tuple_methods():
+  tpl.count(x) #-> Returns number of times "x" occurs in tuple
+  tpl.index(x) #-> Returns index of first occurance of "x" in tuple --> Error if not found
 
 
 
