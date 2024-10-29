@@ -101,7 +101,9 @@ dct.setdefault(key, value) #-> Returns value of specified key, if key does not e
 dct.update(x) #-> Add key-value pair to dictionary, Input: list/tuple/set
 dct.values(x) #-> Returns list of all values of dictionary
 
-#some very important info about slicing 
+#Tuple methods - tuple = tpl:
+tpl.count(x) #-> Returns number of times "x" occurs in tuple
+tpl.index(x) #-> Returns index of first occurance of "x" in tuple --> Error if not found
 
 """
 Lecture code:
