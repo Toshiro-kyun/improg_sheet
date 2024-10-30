@@ -182,6 +182,10 @@ General functions:
         else:
             return True
 
+  #Function to check whether all the word only consists of characters stored in s
+    def check_char(word, s):
+      return all([x in s for x in word])
+      
  #Function determining the number of solutions of a given quadratic equation:
     def number_of_quadratic_solutions(a,b,c):
       if b**2-4*a*c == 0:
