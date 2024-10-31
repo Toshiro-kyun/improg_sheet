@@ -53,7 +53,7 @@ def slice_string():
 #Suppose we want to return, 0 if it is even and 1 if an element is odd 
   def one_odd_zero_even():
       lst = [1, 2, 3, 4, 5, 6]
-    return [0 if x % 2 == 0 else 0 for x in lst]
+    return [0 if x % 2 == 0 else 1 for x in lst]
 
 """
 Methods on how to solve the multiple choice questions:
@@ -181,7 +181,16 @@ General functions:
             return False
         else:
             return True
+          
+  #Function to return all possible substrings of a string
+    def substrings(s):
+      substring_lst = []
+      
+      for x in range(len(s)):
+        for y in range(x + 1, len(s) + 1):
+          substring_lst.append(s[x:y])
 
+      return substring_lst
   #Function to check whether all the word only consists of characters stored in s
     def check_char(word, s):
       return all([x in s for x in word])
