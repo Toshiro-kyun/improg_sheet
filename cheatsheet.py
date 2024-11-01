@@ -273,6 +273,46 @@ General functions:
       return lst[0]
     else:
       return max_value
+  #Function that prints out a given number in expanded form ie. 324 = 300 + 20 + 4. Admittedly very lengthy, but still works
+  def expanded_form(num):
+    if len(str(num)) == 1:
+        return str(num)
+    counter = len(str(num))
+    list_number = []
+    while num >= 10:
+        remainder = num % 10**(counter - 1)
+        list_number.append(num - remainder)
+        num = remainder
+        counter -= 1
+    list_number.append(remainder)
+    final_list_number = []
+    for number in list_number:
+        if number != 0:
+            final_list_number.append(number)
+        else:
+            pass
+    final_list_number2 = []
+    for number in final_list_number:
+        if number not in final_list_number2:
+            final_list_number2.append(number)
+        else:
+            pass
+    result = ""
+    result += f"{final_list_number2[0]} +"
+    for number in final_list_number2[1:len(final_list_number2) - 1]:
+        result += f" {number} +"
+        
+    result += f" {str(final_list_number2[len(final_list_number2) - 1])}"
+    result = result.split(" + ")
+    result2 = []
+    for element in result:
+        if element not in result2:
+            result2.append(element)
+        else:
+            pass
+    return " + ".join(result2)
+
+print(expanded_form(343203))
 
 #Function to do the Tower of Hanoi:
   def tower_hanoi(n, a, b, c):
