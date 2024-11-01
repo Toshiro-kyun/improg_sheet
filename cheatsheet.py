@@ -182,6 +182,9 @@ General functions:
         else:
             return True
           
+  #Function to create a board:
+    def create_board(width, height):
+      return [[0 for _ in range(width)] for _ in range(height)]
   #Function to return all possible substrings of a string
     def substrings(s):
       substring_lst = []
@@ -191,6 +194,7 @@ General functions:
           substring_lst.append(s[x:y])
 
       return substring_lst
+      
   #Function to check whether all the word only consists of characters stored in s
     def check_char(word, s):
       return all([x in s for x in word])
