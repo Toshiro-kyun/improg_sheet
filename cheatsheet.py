@@ -129,7 +129,7 @@ If you are reading this before the exam and dont understand how the method works
 """
 Lecture code:
 """
-
+  
   #Week 6: 
     #Parser:
     def parser():
@@ -152,6 +152,61 @@ Lecture code:
         for number in register:
             print(alphabet[number], end="")
         print()
+
+  #Week 7:
+  #Rebasing (Lecturers method):
+    def rebasing_lec():
+        def rebase(number: str, base_original: int, base_target: int, alphabet: str = "0123456789abcdefghijklmnopqrstuvwxyz") -> str:
+          value = 0
+          for character in number:
+            value = value * base_original + alphabet.find(character)
+          number = ""
+          while value > 0:
+            number = alphabet[value % base_target] + number
+            value //= base_target
+          return number
+  
+  
+        number = input()
+        base_original = int(input())
+        base_target = int(input())
+        number = rebase(number, base_original, base_target)
+        if number != "":
+            print(number)
+        else:
+            print(0)
+          
+  #Rebasing (Tutor's method):
+    def rebasing_tut():
+      x = input()
+      old_base = int(input())
+      new_base = int(input())
+      
+      # Define the base symbols (up to base 36)
+      base = "0123456789abcdefghijklmnopqrstuvwxyz"
+      
+      # Convert the input to base 10
+      base10 = int(x, old_base)
+      
+      # function to convert from base 10 to new base
+      def convert_to_new(number, new):
+          base_inter = []
+          while number > 0:
+              remain = number % new
+              base_inter.append(remain)
+              number //= new
+          return base_inter[::-1]
+      
+      # calling the function
+      new_val = convert_to_new(base10, new_base)
+      
+      # Create the output string from the new base digits
+      new_output = ''
+      for i in new_val:
+          new_output += base[i]
+      
+      print("Converted number:", new_output)
+
 
 """
 General functions:
