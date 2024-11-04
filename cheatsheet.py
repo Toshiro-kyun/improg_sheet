@@ -338,7 +338,16 @@ def recursive_permutation(s):
           return recursive_palindrome(word[1:-1])
       
       return False
-    
+  #Function that recursively flattens a nested list:
+def flatten(nested_list):
+    result = []
+    for item in nested_list:
+        if isinstance(item, list):  # Check if the item is a list
+            result.extend(flatten(item))  # Recursively flatten and extend the result
+        else:
+            result.append(item)  # Add non-list items to the result
+    return result
+  
 #Function that determines whether two lists are permutations of each other (a bit cheeky, but works nonetheless):
   def is_permutation(a, b):
       if sorted(a) == sorted(b):
