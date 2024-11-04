@@ -276,6 +276,30 @@ General functions:
           return 1
       else:
           return x * factorial(x-1)
+
+def main():
+    print(recursive_permutation("happy"))
+# Function that recursively finds all possible swapcase permutations of a string. Eg. "ab" would return ["ab, "Ab, "aB, "AB"]
+def recursive_permutation(s):
+    # Base case: if the string is empty, return an empty list of permutations
+    if s == "":
+        return [""]
+    
+    result = []
+    # Process each character in the string
+    for i in range(len(s)):
+        # Choose the character at index i
+        char = s[i]
+        # Rest of the string after removing char
+        remaining = s[:i] + s[i+1:]
+        
+        # Recursive call for permutations of the remaining string
+        for perm in recursive_permutation(remaining):
+            # Append both lowercase and uppercase variations
+            result.append(char.lower() + perm)
+            result.append(char.upper() + perm)
+    
+    return result
       
 #Function that determines if a number is prime:
   def is_prime(n):
