@@ -300,7 +300,25 @@ def recursive_permutation(s):
             result.append(char.upper() + perm)
     
     return result
-      
+def main():
+    print(recursive_gcd(7, 12))
+
+# Function that recursively finds the gcd of two numbers
+def recursive_gcd(a, b):
+    if a == b:
+        return a
+    elif a > b:
+        if a % b == 0:
+            return b
+        else:
+            return recursive_gcd(a, b - 1)
+    elif a < b:
+        if b % a == 0:
+            return a
+        else:
+            return recursive_gcd(a - 1, b)
+
+main()
 #Function that determines if a number is prime:
   def is_prime(n):
       if n <= 1:
