@@ -339,7 +339,7 @@ def recursive_permutation(s):
       
       return False
   #Function that recursively flattens a nested list:
-def flatten(nested_list):
+def recursive_flatten(nested_list):
     result = []
     for item in nested_list:
         if isinstance(item, list):  # Check if the item is a list
