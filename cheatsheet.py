@@ -15,45 +15,362 @@ def slice_string():
 # Start and end must be within the length of the object
 # Examples:
   
-  def examples():
-    string = "helloWorld"
-    string[1:] #--> "elloWorld"
-    string[:5] #--> "hello"
-    string[1:3] #--> "el"
-    string[1:8:2] #--> elWr
-    string[::-1] #--> dlroWolleh
+def examples():
+  string = "helloWorld"
+  string[1:] #--> "elloWorld"
+  string[:5] #--> "hello"
+  string[1:3] #--> "el"
+  string[1:8:2] #--> elWr
+  string[::-1] #--> dlroWolleh
 
 #Accessing items in string/list/dict/tuples:
-  # !! Remember that indexing starts at 0 and ends at (len(obj) - 1) !!
-  def access():
-    obj[index] #-> Returns item at index "index" --> Used for strings, list, tuples
-    obj[key] #-> Returns value associated with "key" in dictionary
+#Remember that indexing starts at 0 and ends at (len(obj) - 1)
+def access():
+  obj[index] #-> Returns item at index "index" --> Used for strings, list, tuples
+  obj[key] #-> Returns value associated with "key" in dictionary
 
 #Changing items in list/dict:
-  def change():
-    obj[index] = new_value #-> Makes the value of the element at index "index" in list "obj" equal to "new_value"
-    obj[key] = new_value #->  Makes the value of the value of pair with key "key" in dict "obj" equal to "new_value" 
+def change():
+  obj[index] = new_value #-> Makes the value of the element at index "index" in list "obj" equal to "new_value"
+  obj[key] = new_value #->  Makes the value of the value of pair with key "key" in dict "obj" equal to "new_value" 
 
 #Add 2 lists:
-  def add():
-    list1 = [1]
-    list2 = [2]
-    return list1 + list2 #-> Returns [1, 2]
+def add():
+  list1 = [1]
+  list2 = [2]
+  return list1 + list2 #-> Returns [1, 2]
 
 #List comprehension:
 # Easier to demonstrate with an example
 # Suppose we want to convert all elements to strings:
-  def list_convert_str():
-    lst = [1, 2, 3, 4, 5, 6]
-    return [str(x) for x in lst]
+def list_convert_str():
+  lst = [1, 2, 3, 4, 5, 6]
+  return [str(x) for x in lst]
+  
 #Suppose we want to only return elements that are even:
-  def sort_even():
-    lst = [1, 2, 3, 4, 5, 6]
-    return [x for x in lst if x % 2 == 0]
+def sort_even():
+  lst = [1, 2, 3, 4, 5, 6]
+  return [x for x in lst if x % 2 == 0]
+  
 #Suppose we want to return, 0 if it is even and 1 if an element is odd 
-  def one_odd_zero_even():
-      lst = [1, 2, 3, 4, 5, 6]
-    return [0 if x % 2 == 0 else 1 for x in lst]
+def one_odd_zero_even():
+  lst = [1, 2, 3, 4, 5, 6]
+  return [0 if x % 2 == 0 else 1 for x in lst]
+
+"""
+Lecture code:
+"""
+  
+#Week 6: 
+  #Parser:
+def parser():
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    register = [alphabet.find(letter) for letter in input()]
+    instructions = input()
+    
+    position = 0
+    for instruction in instructions:
+        if instruction == "<":
+            position = (position + len(register) - 1) % len(register)
+        if instruction == ">":
+            position = (position + 1) % len(register)
+        if instruction == "*":
+            register[position] = (register[position] + register[(position + 1) % len(register)]) % len(alphabet)
+        if instruction == "+":
+            register[position] = (register[position] + 1) % len(alphabet)
+        if instruction == "-":
+            register[position] = (register[position] + len(alphabet) - 1) % len(alphabet)
+    for number in register:
+        print(alphabet[number], end="")
+    print()
+
+#Week 7:
+#Rebasing (Lecturers method):
+def rebasing_lec():
+    def rebase(number: str, base_original: int, base_target: int, alphabet: str = "0123456789abcdefghijklmnopqrstuvwxyz") -> str:
+      value = 0
+      for character in number:
+        value = value * base_original + alphabet.find(character)
+      number = ""
+      while value > 0:
+        number = alphabet[value % base_target] + number
+        value //= base_target
+      return number
+
+
+    number = input()
+    base_original = int(input())
+    base_target = int(input())
+    number = rebase(number, base_original, base_target)
+    if number != "":
+        print(number)
+    else:
+        print(0)
+          
+#Rebasing (Tutor's method):
+def rebasing_tut():
+  x = input()
+  old_base = int(input())
+  new_base = int(input())
+  
+  # Define the base symbols (up to base 36)
+  base = "0123456789abcdefghijklmnopqrstuvwxyz"
+  
+  # Convert the input to base 10
+  base10 = int(x, old_base)
+  
+  # function to convert from base 10 to new base
+  def convert_to_new(number, new):
+      base_inter = []
+      while number > 0:
+          remain = number % new
+          base_inter.append(remain)
+          number //= new
+      return base_inter[::-1]
+  
+  # calling the function
+  new_val = convert_to_new(base10, new_base)
+  
+  # Create the output string from the new base digits
+  new_output = ''
+  for i in new_val:
+      new_output += base[i]
+  
+  print("Converted number:", new_output)
+
+
+"""
+General functions:
+"""
+#Function that reverses a list or string:
+def reverse(item):
+  return item[::-1]
+    
+#Function that checks if a number is a prime:
+def check_prime(number):
+  if number < 2:
+    return False
+    
+  i = 2
+  while i*i <= number:
+    if number % i == 0:
+      return False
+    i += 1
+      
+  return True
+  
+#Function that determines whether a number is divisble by each of its digits:
+def digit_divisible(number: int):
+  for i in str(number):
+    if number % int(I) != 0:
+        return False
+    else:
+        return True
+        
+#Function to create a board:
+def create_board(width, height):
+  return [[0 for _ in range(width)] for _ in range(height
+                                                  
+#Function to return all possible substrings of a string
+def substrings(s):
+  substring_lst = []
+  
+  for x in range(len(s)):
+    for y in range(x + 1, len(s) + 1):
+      substring_lst.append(s[x:y])
+
+  return substring_lst
+    
+#Function to check whether all the word only consists of characters stored in s
+def check_char(word, s):
+  return all([x in s for x in word])
+    
+#Function determining the number of solutions of a given quadratic equation:
+def number_of_quadratic_solutions(a,b,c):
+  if b**2-4*a*c == 0:
+    return 1
+  elif b**2-4*a*c>0:
+    return 2
+  elif b**2-4*a*c<0:
+    return 0
+    
+#Function that recursively exponentiates a number to a given power:
+def exponentiation(a,b):
+    if b == 0:
+        return 1
+    else:
+        return a * exponentiation(a, b - 1)
+    
+#Function that recursively computes the factorial of a given number:
+def factorial(x):
+    if x == 0:
+        return 1
+    else:
+        return x * factorial(x-1)
+
+def main():
+    print(recursive_permutation("happy"))
+  
+# Function that recursively finds all possible swapcase permutations of a string. Eg. "ab" would return ["ab, "Ab, "aB, "AB"]
+def recursive_permutation(s):
+    # Base case: if the string is empty, return an empty list of permutations
+    if s == "":
+        return [""]
+    
+    result = []
+    # Process each character in the string
+    for i in range(len(s)):
+        # Choose the character at index i
+        char = s[i]
+        # Rest of the string after removing char
+        remaining = s[:i] + s[i+1:]
+        
+        # Recursive call for permutations of the remaining string
+        for perm in recursive_permutation(remaining):
+            # Append both lowercase and uppercase variations
+            result.append(char.lower() + perm)
+            result.append(char.upper() + perm)
+    
+    return result
+  
+def main():
+    print(recursive_gcd(7, 12))
+
+# Function that recursively finds the gcd of two numbers
+def recursive_gcd(a, b):
+    if a == b:
+        return a
+    elif a > b:
+        if a % b == 0:
+            return b
+        else:
+            return recursive_gcd(a, b - 1)
+    elif a < b:
+        if b % a == 0:
+            return a
+        else:
+            return recursive_gcd(a - 1, b)
+
+#Function that determines if a number is prime:
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+  
+#Function that determines if a number is a nested prime:
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def nested_prime(number):
+    count = len(str(number)) 
+    i = 0
+    while i != count:
+        if is_prime(number/10**i):
+            i += 1
+        else:
+            return False
+      
+  return True
+
+#Function that recursively determines if a word is a palindrome:
+def recursive_palindrome(word):
+    if len(word) < 2:
+        return True
+    if word[0] == word[-1]:
+        return recursive_palindrome(word[1:-1])
+    
+    return False
+
+#Function that recursively flattens a nested list:
+def recursive_flatten(nested_list):
+    result = []
+    for item in nested_list:
+        if isinstance(item, list):  # Check if the item is a list
+            result.extend(flatten(item))  # Recursively flatten and extend the result
+        else:
+            result.append(item)  # Add non-list items to the result
+    return result
+  
+#Function that determines whether two lists are permutations of each other (a bit cheeky, but works nonetheless):
+def is_permutation(a, b):
+    if sorted(a) == sorted(b):
+        return True
+    else:
+        return False
+
+#Function that determines the highest number in a list recursively:
+def find_max(lst):
+  if len(lst) == 1:
+    return lst[0]
+    
+  max_value = find_max(lst[1:])
+  if lst[0] > max_value:
+    return lst[0]
+  else:
+    return max_value
+      
+#Function that prints out a given number in expanded form ie. 324 = 300 + 20 + 4. Admittedly very lengthy, but still works
+def expanded_form(num):
+  if len(str(num)) == 1:
+      return str(num)
+  counter = len(str(num))
+  list_number = []
+  while num >= 10:
+      remainder = num % 10**(counter - 1)
+      list_number.append(num - remainder)
+      num = remainder
+      counter -= 1
+  list_number.append(remainder)
+  final_list_number = []
+  for number in list_number:
+      if number != 0:
+          final_list_number.append(number)
+      else:
+          pass
+  final_list_number2 = []
+  for number in final_list_number:
+      if number not in final_list_number2:
+          final_list_number2.append(number)
+      else:
+          pass
+  result = ""
+  result += f"{final_list_number2[0]} +"
+  for number in final_list_number2[1:len(final_list_number2) - 1]:
+      result += f" {number} +"
+      
+  result += f" {str(final_list_number2[len(final_list_number2) - 1])}"
+  result = result.split(" + ")
+  result2 = []
+  for element in result:
+      if element not in result2:
+          result2.append(element)
+      else:
+          pass
+  return " + ".join(result2)
+
+def main():
+  print(expanded_form(343203))
+
+#Function to do the Tower of Hanoi:
+def tower_hanoi(n, a, b, c):
+  #N = number of disks
+  #A = Current pole
+  #B = Auxillary pole
+  #C = Destination
+
+  if n == 1:
+    return print("Move 1st disk from ", a, " to ", b)
+  tower_hanoi(n - 1, a, c, b)
+  print("Move ", n, "the disk from ", a, " to ", c)
+  tower_hanoi(n - 1, b, a, c)
 
 """
 Methods on how to solve the multiple choice questions:
@@ -123,320 +440,6 @@ Hopefullt this helps clear out some stuff, if you are reading this during the ex
 If you are reading this before the exam and dont understand how the method works, contact ricardo@rubert.es
 ---------------------------------------------------------------
 """
-
-
-
-"""
-Lecture code:
-"""
-  
-  #Week 6: 
-    #Parser:
-    def parser():
-        alphabet = "abcdefghijklmnopqrstuvwxyz"
-        register = [alphabet.find(letter) for letter in input()]
-        instructions = input()
-        
-        position = 0
-        for instruction in instructions:
-            if instruction == "<":
-                position = (position + len(register) - 1) % len(register)
-            if instruction == ">":
-                position = (position + 1) % len(register)
-            if instruction == "*":
-                register[position] = (register[position] + register[(position + 1) % len(register)]) % len(alphabet)
-            if instruction == "+":
-                register[position] = (register[position] + 1) % len(alphabet)
-            if instruction == "-":
-                register[position] = (register[position] + len(alphabet) - 1) % len(alphabet)
-        for number in register:
-            print(alphabet[number], end="")
-        print()
-
-  #Week 7:
-  #Rebasing (Lecturers method):
-    def rebasing_lec():
-        def rebase(number: str, base_original: int, base_target: int, alphabet: str = "0123456789abcdefghijklmnopqrstuvwxyz") -> str:
-          value = 0
-          for character in number:
-            value = value * base_original + alphabet.find(character)
-          number = ""
-          while value > 0:
-            number = alphabet[value % base_target] + number
-            value //= base_target
-          return number
-  
-  
-        number = input()
-        base_original = int(input())
-        base_target = int(input())
-        number = rebase(number, base_original, base_target)
-        if number != "":
-            print(number)
-        else:
-            print(0)
-          
-  #Rebasing (Tutor's method):
-    def rebasing_tut():
-      x = input()
-      old_base = int(input())
-      new_base = int(input())
-      
-      # Define the base symbols (up to base 36)
-      base = "0123456789abcdefghijklmnopqrstuvwxyz"
-      
-      # Convert the input to base 10
-      base10 = int(x, old_base)
-      
-      # function to convert from base 10 to new base
-      def convert_to_new(number, new):
-          base_inter = []
-          while number > 0:
-              remain = number % new
-              base_inter.append(remain)
-              number //= new
-          return base_inter[::-1]
-      
-      # calling the function
-      new_val = convert_to_new(base10, new_base)
-      
-      # Create the output string from the new base digits
-      new_output = ''
-      for i in new_val:
-          new_output += base[i]
-      
-      print("Converted number:", new_output)
-
-
-"""
-General functions:
-"""
-
-  #Function that reverses a list or string:
-    def reverse(item):
-      return item[::-1]
-      
-  #Function that checks if a number is a prime:
-    def check_prime(number):
-      if number < 2:
-        return False
-        
-      i = 2
-      while i*i <= number:
-        if number % i == 0:
-          return False
-        i += 1
-          
-      return True
-    
-  #Function that determines whether a number is divisble by each of its digits:
-    def digit_divisible(number: int):
-      for i in str(number):
-        if number % int(I) != 0:
-            return False
-        else:
-            return True
-          
-  #Function to create a board:
-    def create_board(width, height):
-      return [[0 for _ in range(width)] for _ in range(height)]
-  #Function to return all possible substrings of a string
-    def substrings(s):
-      substring_lst = []
-      
-      for x in range(len(s)):
-        for y in range(x + 1, len(s) + 1):
-          substring_lst.append(s[x:y])
-
-      return substring_lst
-      
-  #Function to check whether all the word only consists of characters stored in s
-    def check_char(word, s):
-      return all([x in s for x in word])
-      
- #Function determining the number of solutions of a given quadratic equation:
-    def number_of_quadratic_solutions(a,b,c):
-      if b**2-4*a*c == 0:
-        return 1
-      elif b**2-4*a*c>0:
-        return 2
-      elif b**2-4*a*c<0:
-        return 0
-      
-#Function that recursively exponentiates a number to a given power:
-  def exponentiation(a,b):
-      if b == 0:
-          return 1
-      else:
-          return a * exponentiation(a, b - 1)
-      
-#Function that recursively computes the factorial of a given number:
-  def factorial(x):
-      if x == 0:
-          return 1
-      else:
-          return x * factorial(x-1)
-
-def main():
-    print(recursive_permutation("happy"))
-# Function that recursively finds all possible swapcase permutations of a string. Eg. "ab" would return ["ab, "Ab, "aB, "AB"]
-def recursive_permutation(s):
-    # Base case: if the string is empty, return an empty list of permutations
-    if s == "":
-        return [""]
-    
-    result = []
-    # Process each character in the string
-    for i in range(len(s)):
-        # Choose the character at index i
-        char = s[i]
-        # Rest of the string after removing char
-        remaining = s[:i] + s[i+1:]
-        
-        # Recursive call for permutations of the remaining string
-        for perm in recursive_permutation(remaining):
-            # Append both lowercase and uppercase variations
-            result.append(char.lower() + perm)
-            result.append(char.upper() + perm)
-    
-    return result
-def main():
-    print(recursive_gcd(7, 12))
-
-# Function that recursively finds the gcd of two numbers
-def recursive_gcd(a, b):
-    if a == b:
-        return a
-    elif a > b:
-        if a % b == 0:
-            return b
-        else:
-            return recursive_gcd(a, b - 1)
-    elif a < b:
-        if b % a == 0:
-            return a
-        else:
-            return recursive_gcd(a - 1, b)
-
-main()
-#Function that determines if a number is prime:
-  def is_prime(n):
-      if n <= 1:
-          return False
-      for i in range(2, int(n**0.5) + 1):
-          if n % i == 0:
-              return False
-      return True
-    
-#Function that determines if a number is a nested prime:
-  def is_prime(n):
-      if n <= 1:
-          return False
-      for i in range(2, int(n**0.5) + 1):
-          if n % i == 0:
-              return False
-      return True
-
-  def nested_prime(number):
-      count = len(str(number)) 
-      i = 0
-      while i != count:
-          if is_prime(number/10**i):
-              i += 1
-          else:
-              return False
-        
-    return True
-
-#Function that recursively determines if a word is a palindrome:
-  def recursive_palindrome(word):
-      if len(word) < 2:
-          return True
-      if word[0] == word[-1]:
-          return recursive_palindrome(word[1:-1])
-      
-      return False
-  #Function that recursively flattens a nested list:
-def recursive_flatten(nested_list):
-    result = []
-    for item in nested_list:
-        if isinstance(item, list):  # Check if the item is a list
-            result.extend(flatten(item))  # Recursively flatten and extend the result
-        else:
-            result.append(item)  # Add non-list items to the result
-    return result
-  
-#Function that determines whether two lists are permutations of each other (a bit cheeky, but works nonetheless):
-  def is_permutation(a, b):
-      if sorted(a) == sorted(b):
-          return True
-      else:
-          return False
-
-#Function that determines the highest number in a list recursively:
-  def find_max(lst):
-    if len(lst) == 1:
-      return lst[0]
-      
-    max_value = find_max(lst[1:])
-    if lst[0] > max_value:
-      return lst[0]
-    else:
-      return max_value
-  #Function that prints out a given number in expanded form ie. 324 = 300 + 20 + 4. Admittedly very lengthy, but still works
-  def expanded_form(num):
-    if len(str(num)) == 1:
-        return str(num)
-    counter = len(str(num))
-    list_number = []
-    while num >= 10:
-        remainder = num % 10**(counter - 1)
-        list_number.append(num - remainder)
-        num = remainder
-        counter -= 1
-    list_number.append(remainder)
-    final_list_number = []
-    for number in list_number:
-        if number != 0:
-            final_list_number.append(number)
-        else:
-            pass
-    final_list_number2 = []
-    for number in final_list_number:
-        if number not in final_list_number2:
-            final_list_number2.append(number)
-        else:
-            pass
-    result = ""
-    result += f"{final_list_number2[0]} +"
-    for number in final_list_number2[1:len(final_list_number2) - 1]:
-        result += f" {number} +"
-        
-    result += f" {str(final_list_number2[len(final_list_number2) - 1])}"
-    result = result.split(" + ")
-    result2 = []
-    for element in result:
-        if element not in result2:
-            result2.append(element)
-        else:
-            pass
-    return " + ".join(result2)
-
-print(expanded_form(343203))
-
-#Function to do the Tower of Hanoi:
-  def tower_hanoi(n, a, b, c):
-    #N = number of disks
-    #A = Current pole
-    #B = Auxillary pole
-    #C = Destination
-
-    if n == 1:
-      return print("Move 1st disk from ", a, " to ", b)
-    tower_hanoi(n - 1, a, c, b)
-    print("Move ", n, "the disk from ", a, " to ", c)
-    tower_hanoi(n - 1, b, a, c)
-
 
 """
 Methods
