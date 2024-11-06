@@ -2,7 +2,7 @@
 Summary of Programming Code for Imperative Programming Course for BSc Artificial Intelligence
 Feel free to commit/edit this document
 """
-print("Hello World!")
+print("Hello world!")
 """
 General Info:
 """
