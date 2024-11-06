@@ -339,7 +339,90 @@ def vector_length():
       return math.sqrt(x*x + y*y)
 
 #Week 3:
-  #
+  #Intersecting lines:
+def intersecting_lines():
+  line1_x1 = float(input())
+line1_y1 = float(input())
+line1_x2 = float(input())
+line1_y2 = float(input())
+# Represents line (line1_x1, line1_x2) - (line1_x2, line1_y2)
+line2_x1 = float(input())
+line2_y1 = float(input())
+line2_x2 = float(input())
+line2_y2 = float(input())
+# Represents line (line2_x1, line2_x2) - (line2_x2, line2_y2)
+
+def process(line1_x1, line1_y1, line1_x2, line1_y2, line2_x1, line2_y1, line2_x2, line2_y2):
+  if line1_x1 > line1_x2:
+    return process(line1_x2, line1_y2, line1_x1, line1_y1, line2_x1, line2_y1, line2_x2, line2_y2)
+  if line2_x1 > line2_x2:
+    return process(line1_x1, line1_y1, line1_x2, line1_y2, line2_x2, line2_y2, line2_x1, line2_y1)
+  # Now, line1_x1 <= line1_x2 and line2_x1 <= line2_x2
+  if max(line1_x1, line1_x2) < min(line2_x1, line2_x2) or min(line1_x1, line1_x2) > max(line2_x1, line2_x2):
+    # x-coordinates do not overlap
+    print("NONE")
+  elif max(line1_y1, line1_y2) < min(line2_y1, line2_y2) or min(line1_y1, line1_y2) > max(line2_y1, line2_y2):
+    # y-coordinates do not overlap
+    print("NONE")
+  elif line1_x2 == line1_x1:
+    # Vertical line
+    if line2_x2 == line2_x1:
+      # Two overlapping vertical lines
+      if max(line1_y1, line1_y2) == min(line2_y1, line2_y2):
+        # Lines meet in a single point
+        print("(" + str(line1_x1)+", "+str(max(line1_y1, line1_y2))+")")
+      elif min(line1_y1, line1_y2) == max(line2_y1, line2_y2):
+        # Lines meet in a single point
+        print("(" + str(line1_x1)+", "+str(min(line1_y1, line1_y2))+")")
+      else:
+        # Overlapping line segments
+        print("OVERLAP")
+    else:
+      # One vertical line
+      y = line2_y1 + (line1_x1 - line2_x1) / (line2_x2 - line2_x1) * (line2_y2 - line2_y1)
+      if y < min(line1_y1, line1_y2) or y > max(line1_y1, line1_y2):
+        print("NONE")
+      else:
+        print("("+str(line1_x1)+", "+str(y)+")")
+  elif line2_x2 == line2_x1:
+    # One vertical line, switch the lines
+    return process(line2_x1, line2_y1, line2_x2, line2_y2, line1_x1, line1_y1, line1_x2, line1_y2)
+  else:
+    # Two non-vertical lines
+    b1 = (line1_y2 - line1_y1) / (line1_x2 - line1_x1)
+    a1 = line1_y1 - line1_x1 * b1
+    # First line is a1 + b1 * x
+    b2 = (line2_y2 - line2_y1) / (line2_x2 - line2_x1)
+    a2 = line2_y1 - line2_x1 * b2
+    # Second line is a2 + b2 * x
+    if b2 == b1:
+      # Parallel lines
+      if a1 == a2:
+        # Overlapping lines
+        if line1_x1 == line2_x2:
+          # Lines meet in a single point
+          print("(" + str(line1_x1) + ", " + str(line1_y1) + ")")
+        elif line1_x2 == line2_x1:
+          # Lines meet in a single point
+          print("(" + str(line1_x2) + ", " + str(line1_y2) + ")")
+        else:
+          print("OVERLAP")
+      else:
+          # No overlap
+          print("NONE")
+    else:
+        x = (a1 - a2) / (b2 - b1)
+        if x < min(line1_x1, line1_x2) or x > max(line1_x1, line1_x2):
+          # Intersection point is not part of line 1
+          print("NONE")
+        elif x < min(line2_x1, line2_x2) or x > max(line2_x1, line2_x2):
+          # Intersection point is not part of line 2
+          print("NONE")
+        else:
+          print("("+str(x)+", "+str(a1 + b1 * x)+")")
+
+  def main():
+    process(line1_x1, line1_y1, line1_x2, line1_y2, line2_x1, line2_y1, line2_x2, line2_y2)
 
 #Week 6: 
   #Parser:
