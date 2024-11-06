@@ -307,7 +307,11 @@ def tower_hanoi(n, a, b, c):
 """
 Lecture code:
 """
-  
+#Week 1:
+  #Code deemed the basics of basics and therefore not included
+
+#Week 2: 
+
 #Week 6: 
   #Parser:
 def parser():
