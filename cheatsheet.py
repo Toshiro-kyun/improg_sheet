@@ -424,6 +424,19 @@ def process(line1_x1, line1_y1, line1_x2, line1_y2, line2_x1, line2_y1, line2_x2
   def main():
     process(line1_x1, line1_y1, line1_x2, line1_y2, line2_x1, line2_y1, line2_x2, line2_y2)
 
+  #Oddsevens:
+def oddsevens():
+  player1 = float(input())
+  player2 = float(input())
+  if player1 <= 0 or player2 <= 0:
+    print("FORFEIT")
+  elif int(player1) < player1 or int(player2) < player2:
+    print("FORFEIT")
+  elif (player1 + player2) % 2 == 1:
+    print("ODDS")
+  else:
+    print("EVENS")
+
 #Week 6: 
   #Parser:
 def parser():
