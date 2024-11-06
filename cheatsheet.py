@@ -763,7 +763,35 @@ def rebasing_tut():
   
   print("Converted number:", new_output)
 
+  #Letter-count with dictionary:
+def letter_count_dict():
+  alphabet = "abcdefghijklmnopqrstuvwxyz"
+  letter_counts = {}
+  print("Please enter a text:")
+  for letter in input():
+    if letter.lower() in alphabet:
+      if letter.lower() in letter_counts:
+        letter_counts[letter.lower()] += 1
+      else:
+        letter_counts[letter.lower()] = 0
+        
+  for letter in letter_counts:
+    print(letter + ": " + str(letter_counts[letter]))
 
+  #Maximum of sequence using tuples:
+def get_maximum(seq: list[int]) -> (int,int):
+    maximum_value: int = seq[0]
+    maximum_index: int = 0
+    for i, value in enumerate(seq):
+      if value > maximum_value:
+        maximum_value = value
+        maximum_index = i
+    return maximum_index, maximum_value
+
+
+  sequence: list[int] = [int(term) for term in input().split()]
+  index, value = get_maximum(sequence)
+  print("The maximum value of", value, "is achieved at position", index)
 
 """
 Methods on how to solve the multiple choice questions:
