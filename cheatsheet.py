@@ -57,7 +57,14 @@ def sort_even():
 #Suppose we want to return, 0 if it is even and 1 if an element is odd 
 def one_odd_zero_even():
   lst = [1, 2, 3, 4, 5, 6]
-  return [0 if x % 2 == 0 else 1 for x in lst]
+  return [0 if x % 2 == 0 else 1 for x in last]
+
+#Passing unknown amounts of parameters:
+def pass_parameters(*args):
+  return args #-> For example: pass_parameters(1, 2, 3, 4) will return args = [1, 2, 3, 4]
+
+def pass_parameters(**kwargs):
+  return **kwargs #-> For example: pass_parameters(A= 1, B= 2) will return kwargs = {"A": 1, "B": 2} !!Keywords, e.g. A & B, are needed
 
 """
 General functions:
