@@ -496,8 +496,113 @@ def lunar():
   print("UNSUCCESSFUL")
 
 #Week 5:
+  #Game of life:
+def game_of_life():
+  def get_number_of_neighbours(grid, x, y):
+    count = 0
+    for row in [-1, 0, 1]:
+      for column in [-1, 0, 1]:
+        if 0 <= x + row < len(grid) and 0 <= y + column < len(grid):
+          count += grid[x + row][y + column]
+    count -= grid[x][y]
+    return count
 
+
+  def show_grid(grid):
+    for row in grid:
+      for cell in row:
+        print(" " if cell == 0 else "*", end="")
+      print()
+
+
+  BOARD_SIZE = 31
+  grid_now = [[0 for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
+  grid_next = [[0 for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
+
+  center = BOARD_SIZE // 2
+  grid_now[center - 1][center] = 1
+  grid_now[center][center + 1] = 1
+  grid_now[center + 1][center - 1] = 1
+  grid_now[center + 1][center] = 1
+  grid_now[center + 1][center + 1] = 1
+  show_grid(grid_now)
+  while input() == "":
+    for x in range(BOARD_SIZE):
+      for y in range(BOARD_SIZE):
+        neighbours = get_number_of_neighbours(grid_now, x, y)
+        if neighbours == 3:
+          grid_next[x][y] = 1
+        elif neighbours != 2:
+          grid_next[x][y] = 0
+        else:
+          grid_next[x][y] = grid_now[x][y]
+    for x in range(BOARD_SIZE):
+      for y in range(BOARD_SIZE):
+        grid_now[x][y] = grid_next[x][y]
+    show_grid(grid_now)
+
+  #Descriptive:
+def descriptive():
+  items = [float(term) for term in input().split()]
+  sum_x = 0
+  sum_squared = 0
+  for item in items:
+    sum_x += item
+    sum_squared += item*item
+  print(round(sum_x/len(items),3))
+  print(round((sum_squared - sum_x * sum_x / len(items))/(len(items) - 1), 3))
+
+  #Playfair:
+def playfair():
+  def encode(grid: str, pair: str, offset = 1) -> str:
+    pos1 = grid.index(pair[0])
+    pos2 = grid.index(pair[1])
+    if pos1 == pos2:
+      pos2 = grid.index("&")
+    if pos1 == pos2:
+      # Plaintext &&
+      return pair
+    if pos1 // 7 == pos2 // 7:
+      # Same row
+      return grid[(pos1 // 7) * 7 + ((pos1 + offset) % 7)] + grid[(pos2 // 7) * 7 + ((pos2 + offset) % 7)]
+    if pos1 % 7 == pos2 % 7:
+      # Same column
+      return grid[(((pos1 // 7) + offset) % 7)  * 7 + (pos1 % 7)] + grid[(((pos2 // 7) + offset) % 7) * 7 + (pos2 % 7)]
+    
+    return grid[(pos1 // 7) * 7 + (pos2 % 7)] + grid[(pos2 // 7) * 7 + (pos1 % 7)]
+
+
+  alphabet = "0123456789abcdefghijklmnopqrstuvwxyz .,'\"!?:;()@&"
   
+  codephrase = input().lower()
+  plaintext = input().lower()
+  
+  grid = ""
+  remaining = alphabet
+  for letter in codephrase:
+    if letter in remaining:
+      grid += letter
+      pos = remaining.index(letter)
+      remaining = remaining[:pos] + remaining[(pos + 1):]
+  grid += remaining
+  
+  pairs = ""
+  for letter in plaintext:
+    if letter in alphabet:
+      pairs += letter
+  if len(pairs) % 2 != 0:
+    pairs += " "
+  
+  codetext = ""
+  while len(pairs) > 0:
+    pair = pairs[0:2]
+    encoded = encode(grid, pair)
+    print(pair, encoded)
+    codetext += encoded
+    pairs = pairs[2:]
+  
+  print(codetext)
+
 
 #Week 6: 
   #Parser:
@@ -523,7 +628,7 @@ def parser():
   print()
 
 #Week 7:
-#Rebasing (Lecturers method):
+  #Rebasing (Lecturers method):
 def rebasing_lec():
   def rebase(number: str, base_original: int, base_target: int, alphabet: str = "0123456789abcdefghijklmnopqrstuvwxyz") -> str:
     value = 0
