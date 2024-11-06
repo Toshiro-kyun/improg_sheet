@@ -3,6 +3,8 @@ Summary of Programming Code for Imperative Programming Course for BSc Artificial
 Feel free to commit/edit this document
 """
 print("Hello world!")
+
+
 """
 General Info:
 """
