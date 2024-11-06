@@ -170,6 +170,18 @@ def recursive_gcd(a, b):
           return a
       else:
           return recursive_gcd(a - 1, b)
+#Function that recursively finds sum of digits
+def sum_of_digits(n):
+    if n == 0:
+        return 0
+    else:
+        return n % 10 + sum_of_digits(n // 10)
+#Function that recursively reverses a string
+def reverse_string(s):
+    if len(s) == 0:
+        return ""
+    else:
+        return s[-1] + reverse_string(s[:-1])
 
 #Function that determines if a number is prime:
 def is_prime(n):
