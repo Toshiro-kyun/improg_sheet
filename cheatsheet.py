@@ -115,7 +115,11 @@ def substrings(s):
       substring_lst.append(s[x:y])
 
   return substring_lst
-    
+
+#Function to convert integer to binary:
+def binary_convert(x: int):
+  return f"{x:b}"
+  
 #Function to check whether all the word only consists of characters stored in s
 def check_char(word, s):
   return all([x in s for x in word])
