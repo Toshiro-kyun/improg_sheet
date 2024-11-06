@@ -42,6 +42,14 @@ def add():
   list2 = [2]
   return list1 + list2 #-> Returns [1, 2]
 
+#List into string:
+# -> X = "" (empty string) returns the elements in lst joined into a string
+# -> E.g: lst = ["Hello", "World"], x = "" ====> "HelloWorld"
+# -> X = " " (Space) returns the elements in lst joined into a string with a space between each element 
+# -> E.g: lst = ["Hello", "World"], x = " " ====> "Hello World"
+def list_to_string(lst, x):
+  return f"{x}".join(lst) 
+  
 #List comprehension:
 # Easier to demonstrate with an example
 # Suppose we want to convert all elements to strings:
@@ -990,11 +998,3 @@ def dictionary_methods():
 def tuple_methods():
   tpl.count(x) #-> Returns number of times "x" occurs in tuple
   tpl.index(x) #-> Returns index of first occurance of "x" in tuple --> Error if not found
-
-
-
-
-
-#
-
-
