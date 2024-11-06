@@ -973,7 +973,7 @@ def list_methods():
 def dictionary_methods():
   dct.clear() #-> Remove all element from original dictionary
   dct.copy() #-> Returns copy of original dictionary
-  dct.fromkeys(x, y) #-> Returns a dictionary with specificied keys and values
+  dict.fromkeys(x, y) #-> Returns a dictionary with specificied keys and values
     #  x can be string/list/tuple and wil be the keys
     #  y can be string/list/tuple and wil be the values
     # Each key is matched to the value
