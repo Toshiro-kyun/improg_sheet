@@ -794,13 +794,13 @@ def letter_count_dict():
 
   #Maximum of sequence using tuples:
 def get_maximum(seq: list[int]) -> (int,int):
-    maximum_value: int = seq[0]
-    maximum_index: int = 0
-    for i, value in enumerate(seq):
-      if value > maximum_value:
-        maximum_value = value
-        maximum_index = i
-    return maximum_index, maximum_value
+  maximum_value: int = seq[0]
+  maximum_index: int = 0
+  for i, value in enumerate(seq):
+    if value > maximum_value:
+      maximum_value = value
+      maximum_index = i
+  return maximum_index, maximum_value
 
 
   sequence: list[int] = [int(term) for term in input().split()]
