@@ -304,6 +304,20 @@ def tower_hanoi(n, a, b, c):
   print("Move ", n, "the disk from ", a, " to ", c)
   tower_hanoi(n - 1, b, a, c)
 
+#Recursively find all ways to compute the target with a list of numbers:
+def recursive_compute(nums, target):
+  if len(nums) == 1:
+    return int(nums[0] == target)
+
+  rest_nums = nums[2:]
+  possibilities = [
+    nums[0] + nums[1],
+    nums[0] - nums[1],
+    nums[0] * nums[1],
+    nums[0] / nums[1]
+  ]
+  return sum([recursive_computer(x + rest_nums, target) for x in possibilities])
+
 """
 Lecture code:
 """
