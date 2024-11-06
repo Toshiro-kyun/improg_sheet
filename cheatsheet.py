@@ -883,10 +883,6 @@ If you are reading this before the exam and dont understand how the method works
 ---------------------------------------------------------------
 """
 
-
-
-
-
 """
 Methods
 
@@ -995,5 +991,12 @@ def tuple_methods():
   tpl.count(x) #-> Returns number of times "x" occurs in tuple
   tpl.index(x) #-> Returns index of first occurance of "x" in tuple --> Error if not found
 
+
+
+
+
+
+
+#
 
 
