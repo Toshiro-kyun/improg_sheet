@@ -169,7 +169,7 @@ def digit_divisible(number: int):
         
 #Function to create a board:
 def create_board(width, height):
-  return [[0 for _ in range(width)] for _ in range(height
+  return [[0 for _ in range(width)] for _ in range(height)]
                                                   
 #Function to return all possible substrings of a string
 def substrings(s):
