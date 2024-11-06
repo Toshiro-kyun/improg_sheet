@@ -64,48 +64,48 @@ Lecture code:
 #Week 6: 
   #Parser:
 def parser():
-    alphabet = "abcdefghijklmnopqrstuvwxyz"
-    register = [alphabet.find(letter) for letter in input()]
-    instructions = input()
-    
-    position = 0
-    for instruction in instructions:
-        if instruction == "<":
-            position = (position + len(register) - 1) % len(register)
-        if instruction == ">":
-            position = (position + 1) % len(register)
-        if instruction == "*":
-            register[position] = (register[position] + register[(position + 1) % len(register)]) % len(alphabet)
-        if instruction == "+":
-            register[position] = (register[position] + 1) % len(alphabet)
-        if instruction == "-":
-            register[position] = (register[position] + len(alphabet) - 1) % len(alphabet)
-    for number in register:
-        print(alphabet[number], end="")
-    print()
+  alphabet = "abcdefghijklmnopqrstuvwxyz"
+  register = [alphabet.find(letter) for letter in input()]
+  instructions = input()
+  
+  position = 0
+  for instruction in instructions:
+      if instruction == "<":
+          position = (position + len(register) - 1) % len(register)
+      if instruction == ">":
+          position = (position + 1) % len(register)
+      if instruction == "*":
+          register[position] = (register[position] + register[(position + 1) % len(register)]) % len(alphabet)
+      if instruction == "+":
+          register[position] = (register[position] + 1) % len(alphabet)
+      if instruction == "-":
+          register[position] = (register[position] + len(alphabet) - 1) % len(alphabet)
+  for number in register:
+      print(alphabet[number], end="")
+  print()
 
 #Week 7:
 #Rebasing (Lecturers method):
 def rebasing_lec():
-    def rebase(number: str, base_original: int, base_target: int, alphabet: str = "0123456789abcdefghijklmnopqrstuvwxyz") -> str:
-      value = 0
-      for character in number:
-        value = value * base_original + alphabet.find(character)
-      number = ""
-      while value > 0:
-        number = alphabet[value % base_target] + number
-        value //= base_target
-      return number
+  def rebase(number: str, base_original: int, base_target: int, alphabet: str = "0123456789abcdefghijklmnopqrstuvwxyz") -> str:
+    value = 0
+    for character in number:
+      value = value * base_original + alphabet.find(character)
+    number = ""
+    while value > 0:
+      number = alphabet[value % base_target] + number
+      value //= base_target
+    return number
 
 
-    number = input()
-    base_original = int(input())
-    base_target = int(input())
-    number = rebase(number, base_original, base_target)
-    if number != "":
-        print(number)
-    else:
-        print(0)
+  number = input()
+  base_original = int(input())
+  base_target = int(input())
+  number = rebase(number, base_original, base_target)
+  if number != "":
+      print(number)
+  else:
+      print(0)
           
 #Rebasing (Tutor's method):
 def rebasing_tut():
@@ -196,60 +196,60 @@ def number_of_quadratic_solutions(a,b,c):
     
 #Function that recursively exponentiates a number to a given power:
 def exponentiation(a,b):
-    if b == 0:
-        return 1
-    else:
-        return a * exponentiation(a, b - 1)
+  if b == 0:
+      return 1
+  else:
+      return a * exponentiation(a, b - 1)
     
 #Function that recursively computes the factorial of a given number:
 def factorial(x):
-    if x == 0:
-        return 1
-    else:
-        return x * factorial(x-1)
+  if x == 0:
+      return 1
+  else:
+      return x * factorial(x-1)
 
 def main():
-    print(recursive_permutation("happy"))
+  print(recursive_permutation("happy"))
   
 # Function that recursively finds all possible swapcase permutations of a string. Eg. "ab" would return ["ab, "Ab, "aB, "AB"]
 def recursive_permutation(s):
-    # Base case: if the string is empty, return an empty list of permutations
-    if s == "":
-        return [""]
-    
-    result = []
-    # Process each character in the string
-    for i in range(len(s)):
-        # Choose the character at index i
-        char = s[i]
-        # Rest of the string after removing char
-        remaining = s[:i] + s[i+1:]
-        
-        # Recursive call for permutations of the remaining string
-        for perm in recursive_permutation(remaining):
-            # Append both lowercase and uppercase variations
-            result.append(char.lower() + perm)
-            result.append(char.upper() + perm)
-    
-    return result
+  # Base case: if the string is empty, return an empty list of permutations
+  if s == "":
+      return [""]
+  
+  result = []
+  # Process each character in the string
+  for i in range(len(s)):
+      # Choose the character at index i
+      char = s[i]
+      # Rest of the string after removing char
+      remaining = s[:i] + s[i+1:]
+      
+      # Recursive call for permutations of the remaining string
+      for perm in recursive_permutation(remaining):
+          # Append both lowercase and uppercase variations
+          result.append(char.lower() + perm)
+          result.append(char.upper() + perm)
+  
+  return result
   
 def main():
-    print(recursive_gcd(7, 12))
+  print(recursive_gcd(7, 12))
 
 # Function that recursively finds the gcd of two numbers
 def recursive_gcd(a, b):
-    if a == b:
-        return a
-    elif a > b:
-        if a % b == 0:
-            return b
-        else:
-            return recursive_gcd(a, b - 1)
-    elif a < b:
-        if b % a == 0:
-            return a
-        else:
-            return recursive_gcd(a - 1, b)
+  if a == b:
+      return a
+  elif a > b:
+      if a % b == 0:
+          return b
+      else:
+          return recursive_gcd(a, b - 1)
+  elif a < b:
+      if b % a == 0:
+          return a
+      else:
+          return recursive_gcd(a - 1, b)
 
 #Function that determines if a number is prime:
 def is_prime(n):
@@ -282,29 +282,29 @@ def nested_prime(number):
 
 #Function that recursively determines if a word is a palindrome:
 def recursive_palindrome(word):
-    if len(word) < 2:
-        return True
-    if word[0] == word[-1]:
-        return recursive_palindrome(word[1:-1])
-    
-    return False
+  if len(word) < 2:
+      return True
+  if word[0] == word[-1]:
+      return recursive_palindrome(word[1:-1])
+  
+  return False
 
 #Function that recursively flattens a nested list:
 def recursive_flatten(nested_list):
-    result = []
-    for item in nested_list:
-        if isinstance(item, list):  # Check if the item is a list
-            result.extend(flatten(item))  # Recursively flatten and extend the result
-        else:
-            result.append(item)  # Add non-list items to the result
-    return result
+  result = []
+  for item in nested_list:
+      if isinstance(item, list):  # Check if the item is a list
+          result.extend(flatten(item))  # Recursively flatten and extend the result
+      else:
+          result.append(item)  # Add non-list items to the result
+  return result
   
 #Function that determines whether two lists are permutations of each other (a bit cheeky, but works nonetheless):
 def is_permutation(a, b):
-    if sorted(a) == sorted(b):
-        return True
-    else:
-        return False
+  if sorted(a) == sorted(b):
+      return True
+  else:
+      return False
 
 #Function that determines the highest number in a list recursively:
 def find_max(lst):
