@@ -514,7 +514,7 @@ def string_methods():
   str.upper() #-> Convert string into uppercase
 
 #List methods - list = last:
-def list_methods:
+def list_methods():
   lst.append(x) #-> Add x at the end of original list --> Only 1 input allowed
   lst.clear() #-> Remove all element in original list
   lst.copy() #-> Returns copy of original list
