@@ -437,6 +437,68 @@ def oddsevens():
   else:
     print("EVENS")
 
+#Week 4:
+  #Letter occurrence:
+def letter_occurance():
+  alphabet = "abcdefghijklmnopqrstuvwxyz"
+  letter_counts = [0] * len(alphabet)
+  print("Please enter a text:")
+  for letter in input():
+    if letter.lower() in alphabet:
+      letter_counts[ord(letter.lower()) - ord("a")] += 1
+  
+  for letter in range(len(alphabet)):
+    if letter_counts[letter] > 0:
+      print(alphabet[letter] + ": " + str(letter_counts[letter]))
+
+  #Encoding - Reverse alphabetic characters:
+def encoding():
+  line = input()
+  for character in line:
+    if "a" <= character <= "z":
+      print(chr(ord("z") + ord("a") - ord(character)), end="")
+    elif "A" <= character <= "Z":
+      print(chr(ord("Z") + ord("A") - ord(character)), end="")
+    else:
+      print(character, end="")
+  print()
+
+  #Lunar vacation:
+def lunar():
+  import math
+
+  x = int(input())
+  y = int(input())
+  speed_x = 0
+  speed_y = 0
+  line = input()
+  t = 0
+  gravity = -1.625
+  thrust = 3
+  while line != "":
+    delay = int(line)
+    rotation = int(input())
+    duration = int(input())
+    x = x + speed_x * (delay + duration) + thrust * math.sin(rotation/180 * math.pi) * duration * duration / 2
+    speed_x += thrust * math.sin(rotation/180 * math.pi) * duration
+    y = y + speed_y * delay + gravity * delay * delay / 2
+    speed_y += delay * gravity
+    y = y + speed_y * duration + (gravity + thrust * math.cos(rotation/180 * math.pi)) / 2 * duration * duration
+    speed_y += (thrust * math.cos(rotation/180 * math.pi) + gravity) * duration
+    if y < 0:
+      print("CRASHED")
+      exit(0)
+    if -5 < x < 5 and y < 1 and rotation == 0 and speed_x*speed_x + speed_y*speed_y <= 1:
+      print("SUCCESSFUL")
+      exit(0)
+    line = input()
+    
+  print("UNSUCCESSFUL")
+
+#Week 5:
+
+  
+
 #Week 6: 
   #Parser:
 def parser():
