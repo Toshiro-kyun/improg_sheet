@@ -311,6 +311,35 @@ Lecture code:
   #Code deemed the basics of basics and therefore not included
 
 #Week 2: 
+  #Determine days in a month
+def day_month():
+  month = input().lower()
+  match month:
+    case "january" | "1" | "march" | "3" | "may" | "5" | "july" | "7" | \
+            "august" | "8" | "october" | "10" | "december" | "12":
+      print("That month has 31 days")
+    case "april" | "4" | "june" | "6" | "september" | "9" | "november" | "11":
+      print("That month has 30 days")
+    case "february" | "2":
+      print("That month has 28 days")
+    case other:
+      print("That is not a valid month.")
+
+  #Imperial units:
+def imperial():
+  meters = float(input())
+  inches = meters / 0.0254
+  print(int(inches // 12), "ft", int(inches % 12),"in")
+
+  #Vector-length:
+def vector_length():
+  import math
+  
+  def get_vector_length(x, y):
+      return math.sqrt(x*x + y*y)
+
+#Week 3:
+  #
 
 #Week 6: 
   #Parser:
