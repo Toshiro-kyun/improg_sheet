@@ -613,19 +613,101 @@ def parser():
   
   position = 0
   for instruction in instructions:
-      if instruction == "<":
-          position = (position + len(register) - 1) % len(register)
-      if instruction == ">":
-          position = (position + 1) % len(register)
-      if instruction == "*":
-          register[position] = (register[position] + register[(position + 1) % len(register)]) % len(alphabet)
-      if instruction == "+":
-          register[position] = (register[position] + 1) % len(alphabet)
-      if instruction == "-":
-          register[position] = (register[position] + len(alphabet) - 1) % len(alphabet)
+    if instruction == "<":
+      position = (position + len(register) - 1) % len(register)
+    if instruction == ">":
+      position = (position + 1) % len(register)
+    if instruction == "*":
+      register[position] = (register[position] + register[(position + 1) % len(register)]) % len(alphabet)
+    if instruction == "+":
+      register[position] = (register[position] + 1) % len(alphabet)
+    if instruction == "-":
+      register[position] = (register[position] + len(alphabet) - 1) % len(alphabet)
   for number in register:
-      print(alphabet[number], end="")
+    print(alphabet[number], end="")
   print()
+
+  #Oddsevens recursively:
+def oddsevens_recursive():
+  def is_even(number):
+    return True if number == 0 else is_odd(number - 1)
+  
+  def is_odd(number):
+    return False if number == 0 else is_even(number - 1)
+
+  #Factorial_recursive:
+def factorial_recursive():
+  def factorial_recursive(n):
+    if n <= 1:
+      return 1
+    return n * factorial_recursive(n - 1)
+
+
+  print("Please enter a number")
+  number = int(input())
+  print(str(number) + "! = " + str(factorial_recursive(number)))
+
+  #Power_recursive:
+def power_recursive():
+  def power(g, m):
+    if m == 0:
+      return 1
+    return g * power(g, m - 1)
+
+  #Sudoku-solver:
+def sudoku_solver():
+  def print_sudoku(sudoku):
+    for block in range(0,3):
+      for row in range(block,block+3):
+        print(" ".join(str(value) for value in sudoku[row][0:3]), end=" | ")
+        print(" ".join(str(value) for value in sudoku[row][3:6]), end=" | ")
+        print(" ".join(str(value) for value in sudoku[row][6:9]))
+      if block != 2:
+          print("-" *21)
+  
+  
+  def is_valid_digit(sudoku, row, column, digit):
+    for i in range(9):
+      if sudoku[row][i] == digit:
+        return False
+      if sudoku[i][column] == digit:
+        return False
+    block_row = row - row % 3
+    block_column = column - column % 3
+    for x in range(3):
+      for y in range(3):
+        if sudoku[x + block_row][y + block_column] == digit:
+          return False
+    return True
+  
+  
+  def solve_sudoku(sudoku, row, column):
+    if column >= len(sudoku):
+      column = 0
+      row += 1
+    if row >= len(sudoku):
+      print_sudoku(sudoku)
+      return
+    if sudoku[row][column] != 0:
+      solve_sudoku(sudoku, row, column + 1)
+    else:
+      for digit in range(1,10):
+        if is_valid_digit(sudoku, row, column, digit):
+          sudoku[row][column] = digit
+          solve_sudoku(sudoku, row, column + 1)
+          sudoku[row][column] = 0
+  
+  sudoku = [[6, 0, 3, 4, 0, 1, 0, 8, 0],
+            [0, 0, 0, 0, 0, 0, 4, 7, 0],
+            [0, 7, 1, 0, 0, 2, 0, 0, 0],
+            [0, 0, 0, 7, 0, 4, 0, 2, 0],
+            [0, 2, 5, 0, 3, 0, 7, 1, 0],
+            [0, 0, 4, 8, 0, 0, 9, 0, 0],
+            [0, 6, 9, 0, 0, 0, 2, 0, 8],
+            [0, 0, 8, 0, 0, 9, 1, 4, 0],
+            [1, 0, 7, 0, 0, 0, 3, 0, 9]]
+  
+  solve_sudoku(sudoku, 0, 0)
 
 #Week 7:
   #Rebasing (Lecturers method):
