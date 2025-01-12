@@ -812,7 +812,7 @@ def letter_count_dict():
     print(letter + ": " + str(letter_counts[letter]))
 
   #Maximum of sequence using tuples:
-def get_maximum(seq: list[int]) -> (int,int):
+def get_maximum(seq: list[int]) -> (int, int):
   maximum_value: int = seq[0]
   maximum_index: int = 0
   for i, value in enumerate(seq):
@@ -822,9 +822,143 @@ def get_maximum(seq: list[int]) -> (int,int):
   return maximum_index, maximum_value
 
 
-  sequence: list[int] = [int(term) for term in input().split()]
-  index, value = get_maximum(sequence)
-  print("The maximum value of", value, "is achieved at position", index)
+sequence: list[int] = [int(term) for term in input().split()]
+index, value = get_maximum(sequence)
+print("The maximum value of", value, "is achieved at position", index)
+
+#Week 11:
+
+  #Tricky cubes:
+def tricky_cubes():
+  n, m = [int(k) for k in input().split()]
+  count = 0
+  k = 0
+  while k**3 < n:
+      k += 1
+  while k**3 <= m:
+      k += 1
+      count += 1
+  print(count)
+
+  #Mastermind:
+  def get_clues(guess: str, code: str) -> tuple[int, int]:
+    i = len(guess) - 1
+    correct = 0
+    while i >= 0:
+        if guess[i] == code[i]:
+            guess = guess[:i] + guess[i+1:]
+            code = code[:i] + code[i + 1:]
+            correct += 1
+        i -= 1
+    i = len(guess) - 1
+    misplaced = 0
+    while i >= 0:
+        if code.find(guess[i]) >= 0:
+            pos = code.find(guess[i])
+            guess = guess[:i] + guess[i+1:]
+            code = code[:pos] + code[pos + 1:]
+            misplaced += 1
+        i -= 1
+    return correct, misplaced
+
+
+  def check_possibility(code: str) -> bool:
+    for clue in clues:
+        information = get_clues(code, clue[0])
+        if information[0] != clue[1] or information[1] != clue[2]:
+            return False
+    return True
+
+  def generate_codes(length: int, code: str = "") -> int:
+    count = 0
+    if len(code) < length:
+        for letter in alphabet:
+            count += generate_codes(length, code + letter)
+        return count
+    if check_possibility(code):
+        return 1
+    return 0
+
+
+  alphabet = "abcdefghijklmnopqrstuvwxyz"
+  clues = []
+  line = input()
+  answer = ""
+  while line != "":
+      clues.append(line.split())
+      clues[-1][1] = int(clues[-1][1])
+      clues[-1][2] = int(clues[-1][2])
+      if clues[-1][1] == 0 and clues[-1][2] == 0:
+          for letter in clues[-1][0]:
+              pos = alphabet.find(letter)
+              if pos >= 0:
+                  alphabet = alphabet[:pos] + alphabet[pos+1:]
+      if clues[-1][1] == len(clues[-1][0]):
+          answer = clues[-1][0]
+      line = input()
+  if answer != "":
+      if check_possibility(answer):
+          print(1)
+      else:
+          print(0)
+  else:
+      print(generate_codes(len(clues[0][0])))
+
+
+  #Week 12
+    #Flipping coins:
+
+import math
+
+n = int(input())
+print(n - math.isqrt(n))
+
+    #Scheduling nightmare:
+
+def get_optimal_assignment_value(matrix: list[list], current_line = 0, taken: list = []):
+    """
+    Returns the optimal satisfaction given a matrix of satisfactions
+    :param matrix: Matrix of individual (row) satisfactions for being assigned tasks (column),
+                   or X if satisfaction is minus infinity
+    :param current_line: Current individual being assigned a task
+    :param taken: Which tasks have already been taken
+    :return:
+    """
+    if current_line >= len(matrix):
+        return 0
+    current_best = 0
+    possible = False
+    for option in range(len(matrix[current_line])):
+        # For each possible task
+        if option not in taken and matrix[current_line][option] != "X":
+            # If the task is not taken, and assignment of
+            # individual current_line to option is possible,
+            # find the best assignment of future individuals
+            value = get_optimal_assignment_value(matrix, current_line + 1, taken + [option])
+            if value >= 0 and value + matrix[current_line][option] >= current_best:
+                # If such an assignment of future individuals is possible
+                # and leads to a better satisfaction than currently known,
+                # update the satisfaction value
+                possible = True
+                current_best = value + matrix[current_line][option]
+    if possible:
+        # If we have found a possible assignment,
+        # return the best we found
+        return current_best
+    # Impossible assignment reached
+    return -1
+
+matrix = []
+matrix.append([value if value == "X" else int(value) for value in input().split()])
+while len(matrix) < len(matrix[0]):
+    matrix.append([value if value == "X" else int(value) for value in input().split()])
+
+best_value = get_optimal_assignment_value(matrix)
+if best_value >= 0:
+    print(best_value)
+else:
+    print("IMPOSSIBLE")
+
 
 """
 Methods on how to solve the multiple choice questions:
@@ -932,7 +1066,7 @@ def built_functions():
   sorted() #-> Returns sorted list/dict/tuple/set --> With dict: sort keys
   sum() #-> Sums all objects in list/dict/tuple/set --> With dict: sum keys
   tuple() #-> Returns tuple --> Input: list/dict/tuple/set
-  type() #-> Returns type of input
+  type() #-> Returns type   of input
 
 #String methods - str = string:
 def string_methods():
@@ -965,6 +1099,7 @@ def string_methods():
   str.startswith(x) #-> Returns True when string starts with x
   str.strip() #-> Remove all whitespaces at beginning or end of string
   str.swapcase() #-> Lowercase of string become uppercase and vice versa
+  str.translate(d) #-> Replace every key of d in the string with the value of the key, d must be a dicitonary and the keys and values must be ascii
   str.upper() #-> Convert string into uppercase
 
 #List methods - list = last:
@@ -1002,3 +1137,23 @@ def dictionary_methods():
 def tuple_methods():
   tpl.count(x) #-> Returns number of times "x" occurs in tuple
   tpl.index(x) #-> Returns index of first occurance of "x" in tuple --> Error if not found
+
+#Set methods - set = set:
+def set_methods():
+   set.add(x) #-> Adds x to set
+   set.clear() #-> Empties set
+   set.copy() #-> Returns copy of set
+   set.difference(set2) #-> Returns what is in set but not in set2
+   set.difference_update(set2) #-> Removes all items in set that are also included in set2
+   set.discard(x) #-> Removes x from set
+   set.intersection(set2) #-> Returns a set that is the intersection of set and set2
+   set.intersection_update(set2) #-> Removes items in set that are not in set2
+   set.isdisjoint(set2) #-> Returns whether set and set2 have an intersection
+   set.issubset(set2) #-> Returns True if all items in the set exist in set2, otherwise false
+   set.issuperset(set2) #-> Returns True if all items in set2 exist in set1, otherwise False
+   set.pop() #-> Remove random item from set
+   set.remove(x) #-> Removes x from set
+   set.symmetric_difference() #-> Returns a set with all items from both sets but not items present in both sets
+   set.symmetric_difference_update() #-> Insert symmetric differences from set and set2
+   set.union(set2) #-> Returns a set with union of set and set2
+   set.update(set2) #-> Update set with union of this set and set2
