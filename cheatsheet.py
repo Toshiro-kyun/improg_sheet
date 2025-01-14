@@ -959,7 +959,148 @@ if best_value >= 0:
 else:
     print("IMPOSSIBLE")
 
+"""
+Sorting algorithms:
+!! Assume worst time-complexity !!
 
+| Algorithm       | Worst       | Best        | Average     | Space  |
+| --------------- | ----------- | ----------- | ----------- | ------ |
+| Selection sort  | O(n^2)      | O(n^2)      | O(n^2)      | O(1)   |
+| Insertion sort  | O(n^2)      | O(n)        | O(n^2)      | O(1)   |
+| Bubble sort     | O(n^2)      | O(n)        | O(n^2)      | O(1)   |
+| Merge sort      | O(n*log(n)) | O(n*log(n)) | O(n*log(n)) | O(n)   |
+| Quicksort       | O(n^2)      | O(n*log(n)) | O(n*log(n)) | O(1)   |
+"""
+
+# Selection sort
+def selection_sorting_algorithm():
+  def swap_elements(sequence: list[int], x: int, y: int) -> None:
+    temp_element = sequence[x]
+    sequence[x] = sequence[y]
+    sequence[y] = temp_element
+
+
+  def selection_sort(sequence: list[int]) -> None:
+    for i in range(len(sequence)):
+        minimum_index = i
+        for j in range(i+1, len(sequence)):
+            if sequence[j] < sequence[minimum_index]:
+                minimum_index = j
+        swap_elements(sequence, i, minimum_index)
+
+#Insertion sort
+def intersection_sorting_algorithm():
+  def insertion_sort(sequence: list[int]) -> None:
+    for i in range(1, len(sequence)):
+        value = i
+        j = i
+        while j > 0 and sequence[j - 1] > value:
+            sequence[j] = sequence[j - 1]
+            j -= 1
+        sequence[j] = value
+
+#Bubble sort
+def bubble_sorting_algorithm():
+  def swap_elements(sequence: list[int], x: int, y: int) -> None:
+    temp_element = sequence[x]
+    sequence[x] = sequence[y]
+    sequence[y] = temp_element
+
+  def bubble_sort(sequence: list[int]) -> None:
+    for right in range(len(sequence), 0, -1):
+      for i in range(1, right):
+        if sequence[i - 1] > sequence[i]:
+          swap_elements(sequence, i, i - 1)
+
+#Merge sort
+def merge_sorting_algorithm():
+  def merge(sequence: list[int], midpoint: int) -> list[int]:
+    left = 0
+    right = midpoint
+    mergedList = [0] * len(sequence)
+    for position in range(len(mergedList)):
+      if left < midpoint:
+        if right < len(sequence) and sequence[left] > sequence[right]:
+          mergedList[position] = sequence[right]
+          right += 1
+        else:
+          mergedList[position] = sequence[left]
+          left += 1
+      else:
+        mergedList[position] = sequence[right]
+        right += 1
+    return mergedList
+
+  def merge_sort(sequence: list[int]) -> list[int]:
+    if len(sequence) == 1:
+      return sequence
+    midpoint = len(sequence) // 2
+    sequence = merge_sort(sequence[:midpoint]) + merge_sort(sequence[midpoint:])
+    return merge(sequence, midpoint)
+  
+# Quick sort
+def quick_sorting_algorithm():
+  def swap_elements(sequence: list[int], x: int, y: int) -> None:
+    temp_element = sequence[x]
+    sequence[x] = sequence[y]
+    sequence[y] = temp_element
+
+  def quicksort(sequence: list[int], start: int = 0, end: int = -1) -> None:
+    if end < 0:
+      end = len(sequence)
+    if end - start <= 1:
+      return
+    pivot = sequence[start]
+    left = start + 1
+    right = end - 1
+    while left <= right:
+      while left <= right and sequence[left] <= pivot:
+        left += 1
+        while left <= right and sequence[right] > pivot:
+          right -= 1
+        if left < right:
+          swap_elements(sequence, left, right)
+    swap_elements(sequence, start, left - 1)
+    quicksort(sequence, start, left - 1)
+    quicksort(sequence, left, end)
+
+# Shell sort (Varaition on insertion sort)
+def shell_sorting_algorithm():
+  def swap_elements(sequence: list[int], x: int, y: int) -> None:
+    temp_element = sequence[x]
+    sequence[x] = sequence[y]
+    sequence[y] = temp_element
+
+  def shellsort(sequence: list[int]) -> None:
+    gap = len(sequence) // 2
+    while gap > 0:
+      for position in range(gap, len(sequence)):
+        i = position
+        while i >= gap and sequence[i - gap] > sequence[i]:
+          swap_elements(sequence, i - gap, i)
+          i -= gap
+      gap //= 2
+
+# Shaker sort (Variation bubble sort)
+def shaker_sorting_algorithm():
+  def swap_elements(sequence: list[int], x: int, y: int) -> None:
+    temp_element = sequence[x]
+    sequence[x] = sequence[y]
+    sequence[y] = temp_element
+
+  def shaker_sort(sequence: list[int]) -> None:
+    left = 0
+    right = len(sequence)
+    while left < right:
+      for i in range(left + 1, right):
+        if sequence[i - 1] > sequence[i]:
+          swap_elements(sequence, i, i - 1)
+      right -= 1
+      for i in range(right - 1, left, -1):
+        if sequence[i - 1] > sequence[i]:
+          swap_elements(sequence, i, i - 1)
+      left += 1
+      
 """
 Methods on how to solve the multiple choice questions:
 
