@@ -963,13 +963,15 @@ else:
 Sorting algorithms:
 !! Assume worst time-complexity !!
 
-| Algorithm       | Worst       | Best        | Average     | Space  |
-| --------------- | ----------- | ----------- | ----------- | ------ |
-| Selection sort  | O(n^2)      | O(n^2)      | O(n^2)      | O(1)   |
-| Insertion sort  | O(n^2)      | O(n)        | O(n^2)      | O(1)   |
-| Bubble sort     | O(n^2)      | O(n)        | O(n^2)      | O(1)   |
-| Merge sort      | O(n*log(n)) | O(n*log(n)) | O(n*log(n)) | O(n)   |
-| Quicksort       | O(n^2)      | O(n*log(n)) | O(n*log(n)) | O(1)   |
+| Algorithm       | Worst            | Best             | Average          | Space  |
+| --------------- | ---------------- | ---------------- | ---------------- | ------ |
+| Selection sort  | O(n^2)           | O(n^2)           | O(n^2)           | O(1)   |
+| Insertion sort  | O(n^2)           | O(n)             | O(n^2)           | O(1)   |
+| Bubble sort     | O(n^2)           | O(n)             | O(n^2)           | O(1)   |
+| Merge sort      | O(n*log(n))      | O(n*log(n))      | O(n*log(n))      | O(n)   |
+| Quicksort       | O(n^2)           | O(n*log(n))      | O(n*log(n))      | O(1)   |
+| Counting sort   | O(n+k)           | O(n+k)           | O(n+k)           | O(k)   |
+| Radix sort      | O(log_r(k)(n+r)) | O(log_r(k)(n+r)) | O(log_r(k)(n+r)) | O(n+r) |
 """
 
 # Selection sort
@@ -1100,6 +1102,50 @@ def shaker_sorting_algorithm():
         if sequence[i - 1] > sequence[i]:
           swap_elements(sequence, i, i - 1)
       left += 1
+
+# Counting sort
+def counting_sorting_algorithm():
+  MAX_NUMBER = 1001
+
+  def counting_sort(sequence: list[int]) -> None:
+    tally = [0] * MAX_NUMBER
+    for value in sequence:
+      tally[value] += 1
+    position = 0
+    for value in range(len(tally)):
+      while tally[value] > 0:
+        sequence[position] = value
+        position += 1
+        tally[value] -= 1
+
+def radix_sorting_algorithm():
+  MAX_NUMBER = 1000000000
+  RADIX = 10
+
+
+  def counting_sort(sequence: list[int], factor: int = 1) -> None:
+    output = [0] * len(sequence)
+    tally = [0] * RADIX
+    for value in sequence:
+      tally[(value // factor) % RADIX] += 1
+    for i in range(1, RADIX):
+      tally[i] += tally[i - 1]
+    position = len(sequence) - 1
+    while position >= 0:
+      tally_position = (sequence[position] // factor) % RADIX
+      tally[tally_position] -= 1
+      output[tally[tally_position]] = sequence[position]
+      position -= 1
+    for position in range(len(sequence)):
+      sequence[position] = output[position]
+
+
+  def radix_sort(sequence: list[int]) -> None:
+    factor = 1
+    while factor < MAX_NUMBER:
+      counting_sort(sequence, factor)
+      factor *= RADIX
+
       
 """
 Methods on how to solve the multiple choice questions:
