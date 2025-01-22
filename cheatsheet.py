@@ -1151,7 +1151,155 @@ def radix_sorting_algorithm():
       counting_sort(sequence, factor)
       factor *= RADIX
 
-      
+"""
+Recursion General Functions:
+"""
+
+# Calculate sum of numbers from 1 to n
+def sum_to_n(n):
+  if n == 0:
+    return 0
+  return n + sum_to_n(n-1)
+
+
+# Amount of characters in a string
+def count_characters(s):
+  if s == "":
+    return 0
+  return 1 + count_characters(s[1:])
+
+# Check if string is a palindrome
+def is_palindrome(s):
+  if len(s) <= 1:
+    return True
+  return s[0] == s[-1] and is_palindrome(s[1:-1])
+
+# Reverse a string
+def reverse_string(s):
+  if s == "":
+    return ""
+  return s[-1] + reverse_string(s[:-1])
+
+# Count number of vowels in a string
+def count_vowels(s):
+  vowels = "aeiouAEIOU"
+  if s == "":
+    return 0
+  return (1 if s[0] in vowels else 0) + count_vowels(s[1:])
+
+# Generate all subsets of a string
+# Output: ['', 'c', 'b', 'bc', 'a', 'ac', 'ab', 'abc']
+def generate_subsets(s):
+  if s == "":
+    return [""]
+  smaller_subsets = generate_subsets(s[1:])
+  return smaller_subsets + [s[0] + subset for subset in smaller_subsets]
+
+#n-th item in a Fibonacci sequence
+def fibonacci(n):
+  if n == 0:
+    return 0
+  if n == 1:
+    return 1
+  return fibonacci(n-1) + fibonacci(n-2)
+
+# Generate all permutations of a given number
+# Output: [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
+def generate_permutations(nums):
+  if len(nums) == 0:
+    return [[]]
+  permutations = []
+  for i in range(len(nums)):
+    rest = nums[:i] + nums[i+1:]
+    for perm in generate_permutations(rest):
+      permutations.append([nums[i]] + perm)
+  return permutations
+
+# Vignere cipher
+# Explanation: The Vigenère cipher is a method of encrypting alphabetic text where each letter of the plaintext is encoded with a different Caesar cipher, whose increment is determined by the corresponding letter of another text, the key.
+
+def vigenere_cipher(text, key, encrypt=True):
+  def shift(c, k, encrypt):
+    if not c.isalpha():
+      return c
+    base = 'A' if c.isupper() else 'a'
+    offset = ord(k.upper() if c.isupper() else k.lower()) - ord(base)
+    if not encrypt:
+      offset = -offset
+    return chr((ord(c) - ord(base) + offset) % 26 + ord(base))
+
+  def recursive_cipher(t, k):
+    if not t:
+      return ""
+    current_shift = shift(t[0], k[0], encrypt) if t[0].isalpha() else t[0]
+    return current_shift + recursive_cipher(t[1:], k[1:] + k[0] if len(k) > 1 else k)
+
+  return recursive_cipher(text, key)
+
+# Double vowels:
+def double_vowels(s):
+  vowels = "aeiouAEIOU"
+  if s == "":
+    return ""
+  return (s[0] * 2 if s[0] in vowels else s[0]) + double_vowels(s[1:])
+
+# Expand a run-length encoding
+# Explaination: Run-length encoding is a form of lossless data compression in which runs of data are stored as a single occurrence of that data value and a count of its consecutive occurrences, rather than as the original run.
+
+def expand_run_length_encoded_string(s):
+  if not s:
+    return ""
+  num = ""
+  i = 0
+  while i < len(s) and s[i].isdigit():
+    num += s[i]
+    i += 1
+  return (s[i] * int(num)) + expand_run_length_encoded_string(s[i+1:]) if num else ""
+
+# Check if array is sorted
+def is_sorted(arr):
+  if len(arr) <= 1:
+    return True
+  return arr[0] <= arr[1] and is_sorted(arr[1:])
+
+# Infix to postfix
+def infix_to_postfix(exp):
+  precedence = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}
+
+  def helper(tokens, stack=[]):
+    if not tokens:  # Base case: No more tokens
+      return "".join(stack[::-1])  # Remaining operators in stack are appended to the result in reverse order
+
+    token = tokens[0]
+
+    # Case 1: Operand (alphabet or digit)
+    if token.isalnum():
+      return token + helper(tokens[1:], stack)
+
+    # Case 2: Left Parenthesis
+    elif token == '(':
+      return helper(tokens[1:], ['('] + stack)
+
+    # Case 3: Right Parenthesis
+    elif token == ')':
+      result = ""
+      while stack and stack[-1] != '(':
+        result += stack.pop()
+      stack.pop()  # Remove the '(' from stack
+      return result + helper(tokens[1:], stack)
+
+    # Case 4: Operator
+    else:
+      result = ""
+      while (stack and stack[-1] != '(' and
+            precedence.get(stack[-1], 0) >= precedence.get(token, 0)):
+        result += stack.pop()
+      stack.append(token)
+      return result + helper(tokens[1:], stack)
+
+  # Split input into tokens and process them recursively
+  return helper(list(exp))
+
 """
 Methods on how to solve the multiple choice questions:
 
