@@ -958,7 +958,12 @@ if best_value >= 0:
     print(best_value)
 else:
     print("IMPOSSIBLE")
-
+  
+def generate_subsets(s):
+    if s == "":
+        return [""]
+    smaller_subsets = generate_subsets(s[1:])
+    return smaller_subsets + [s[0] + subset for subset in smaller_subsets]
 """
 Sorting algorithms:
 !! Assume worst time-complexity !!
