@@ -132,7 +132,12 @@ def number_of_quadratic_solutions(a,b,c):
     return 2
   elif b**2-4*a*c<0:
     return 0
-    
+
+# Shifting a character "c" forwards by "shift" with wrapping around the alphabet
+def shifting_with_wrapping(c, shift):
+  base = "a" # You can change this base
+  return chr((ord(c) - ord(base) + shift) % 26 + ord(base))
+
 #Function that recursively exponentiates a number to a given power:
 def exponentiation(a,b):
   if b == 0:
