@@ -817,19 +817,20 @@ def letter_count_dict():
     print(letter + ": " + str(letter_counts[letter]))
 
   #Maximum of sequence using tuples:
-def get_maximum(seq: list[int]) -> (int, int):
-  maximum_value: int = seq[0]
-  maximum_index: int = 0
-  for i, value in enumerate(seq):
-    if value > maximum_value:
-      maximum_value = value
-      maximum_index = i
-  return maximum_index, maximum_value
 
+def maximum_of_sequence():
+  def get_maximum(seq: list[int]) -> (int, int):
+    maximum_value: int = seq[0]
+    maximum_index: int = 0
+    for i, value in enumerate(seq):
+      if value > maximum_value:
+        maximum_value = value
+        maximum_index = i
+    return maximum_index, maximum_value
 
-sequence: list[int] = [int(term) for term in input().split()]
-index, value = get_maximum(sequence)
-print("The maximum value of", value, "is achieved at position", index)
+  sequence: list[int] = [int(term) for term in input().split()]
+  index, value = get_maximum(sequence)
+  print("The maximum value of", value, "is achieved at position", index)
 
 #Week 11:
 
@@ -912,63 +913,58 @@ def tricky_cubes():
 
   #Week 12
     #Flipping coins:
+def flipping_coins():
+  import math
 
-import math
-
-n = int(input())
-print(n - math.isqrt(n))
+  n = int(input())
+  print(n - math.isqrt(n))
 
     #Scheduling nightmare:
-
-def get_optimal_assignment_value(matrix: list[list], current_line = 0, taken: list = []):
+def scheduling_nightmare():
+  def get_optimal_assignment_value(matrix: list[list], current_line = 0, taken: list = []):
     """
     Returns the optimal satisfaction given a matrix of satisfactions
     :param matrix: Matrix of individual (row) satisfactions for being assigned tasks (column),
-                   or X if satisfaction is minus infinity
+                  or X if satisfaction is minus infinity
     :param current_line: Current individual being assigned a task
     :param taken: Which tasks have already been taken
     :return:
     """
     if current_line >= len(matrix):
-        return 0
+      return 0
     current_best = 0
     possible = False
     for option in range(len(matrix[current_line])):
-        # For each possible task
-        if option not in taken and matrix[current_line][option] != "X":
-            # If the task is not taken, and assignment of
-            # individual current_line to option is possible,
-            # find the best assignment of future individuals
-            value = get_optimal_assignment_value(matrix, current_line + 1, taken + [option])
-            if value >= 0 and value + matrix[current_line][option] >= current_best:
-                # If such an assignment of future individuals is possible
-                # and leads to a better satisfaction than currently known,
-                # update the satisfaction value
-                possible = True
-                current_best = value + matrix[current_line][option]
+      # For each possible task
+      if option not in taken and matrix[current_line][option] != "X":
+        # If the task is not taken, and assignment of
+        # individual current_line to option is possible,
+        # find the best assignment of future individuals
+        value = get_optimal_assignment_value(matrix, current_line + 1, taken + [option])
+        if value >= 0 and value + matrix[current_line][option] >= current_best:
+          # If such an assignment of future individuals is possible
+          # and leads to a better satisfaction than currently known,
+          # update the satisfaction value
+          possible = True
+          current_best = value + matrix[current_line][option]
     if possible:
-        # If we have found a possible assignment,
-        # return the best we found
-        return current_best
+      # If we have found a possible assignment,
+      # return the best we found
+      return current_best
     # Impossible assignment reached
     return -1
 
-matrix = []
-matrix.append([value if value == "X" else int(value) for value in input().split()])
-while len(matrix) < len(matrix[0]):
+  matrix = []
+  matrix.append([value if value == "X" else int(value) for value in input().split()])
+  while len(matrix) < len(matrix[0]):
     matrix.append([value if value == "X" else int(value) for value in input().split()])
 
-best_value = get_optimal_assignment_value(matrix)
-if best_value >= 0:
+  best_value = get_optimal_assignment_value(matrix)
+  if best_value >= 0:
     print(best_value)
-else:
+  else:
     print("IMPOSSIBLE")
   
-def generate_subsets(s):
-    if s == "":
-        return [""]
-    smaller_subsets = generate_subsets(s[1:])
-    return smaller_subsets + [s[0] + subset for subset in smaller_subsets]
 """
 Sorting algorithms:
 !! Assume worst time-complexity !!
@@ -1162,59 +1158,98 @@ Sorting algorithms recursively:
 Notes: 
   Mergesort is already recursive
   Quicksort is already recursive
+
 """
 
-def selection_sort_recursive_1(x, index = 0):
-  if index + 1 == len(x):
-    return x #-> Or return nothing because the original x is already modified
+def selection_sort_recursive_1(sequence: list[int], index: int = 0):
+  if index + 1 == len(sequence):
+    return sequence #-> Or return nothing because the original sequence is already modified
   
-  temp = min(x[index:])
-  smallest_element_index = x.index(temp)
-  x[smallest_element_index] = x[index]
-  x[index] = temp
+  temp = min(sequence[index:])
+  smallest_element_index = sequence.index(temp)
+  sequence[smallest_element_index] = sequence[index]
+  sequence[index] = temp
 
-  return selection_sort_recursive_1(x, index + 1)
+  return selection_sort_recursive_1(sequence, index + 1)
 
-def selection_sort_recursive_2(x, index = 0):
-  if index + 1 == len(x):
-    return x #-> Or return nothing because the original x is already modified
+def selection_sort_recursive_2(sequence: list[int], index: int = 0):
+  if index + 1 == len(sequence):
+    return sequence #-> Or return nothing because the original sequence is already modified
 
   minimum_index = index
   for j in range(index + 1, len(x)):
-    if x[j] < x[minimum_index]:
+    if sequence[j] < sequence[minimum_index]:
       minimum_index = j
 
-  temp_element = x[index]
-  x[index] = x[minimum_index]
-  x[minimum_index] = temp_element
+  temp_element = sequence[index]
+  sequence[index] = sequence[minimum_index]
+  sequence[minimum_index] = temp_element
 
-  return selection_sort_recursive_2(x, index + 1)
+  return selection_sort_recursive_2(sequence, index + 1)
 
-def insertion_sort_recursive(x, index = 1):
-  if index == len(x):
-    return x #-> Or return nothing because the original x is already modified
+def insertion_sort_recursive(sequence: list[int], index: int = 1):
+  if index == len(sequence):
+    return sequence #-> Or return nothing because the original sequence is already modified
   
-  value = x[index]
+  value = sequence[index]
   j = index
-  while j > 0 and x[j - 1] > value:
-    x[j] = x[j - 1]
+  while j > 0 and sequence[j - 1] > value:
+    sequence[j] = sequence[j - 1]
     j -= 1
-  x[j] = value
+  sequence[j] = value
 
-  return insertion_sort_recursive(x, index + 1)
+  return insertion_sort_recursive(sequence, index + 1)
 
-def bubble_sort_recursive(x, index = 0):
-  right = len(x) - index
+def bubble_sort_recursive(sequence: list[int], index: int = 0):
+  right = len(sequence) - index
   if right == 1:
-    return x #-> Or return nothing because the original x is already modified
+    return sequence #-> Or return nothing because the original sequence is already modified
   
   for i in range(1, right):
-    if x[i - 1] > x[i]:
-      temp_element = x[i]
-      x[i] = x[i - 1]
-      x[i - 1] = temp_element
+    if sequence[i - 1] > sequence[i]:
+      temp_element = sequence[i]
+      sequence[i] = sequence[i - 1]
+      sequence[i - 1] = temp_element
 
-  return bubble_sort_recursive(x, index + 1)
+  return bubble_sort_recursive(sequence, index + 1)
+
+def shell_sort_recursively(sequence: list[int], gap: int = -1):
+  if gap < 0:
+    gap = len(sequence) // 2
+  elif gap == 0:
+    return sequence #-> Or return nothing because the original sequence is already modified
+
+  for position in range(gap, len(sequence)):
+    i = position
+    while i >= gap and sequence[i - gap] > sequence[i]:
+      temp_element = sequence[i - gap]
+      sequence[i - gap] = sequence[i]
+      sequence[i] = temp_element
+      i -= gap
+  
+  return shell_sort_recursively(sequence, gap // 2)
+
+def shaker_sort_recursively(sequence: list[int], left: int = 0, right: int = -1):
+  if right < 0:
+    right = len(sequence)
+
+  if left >= right:
+    return sequence
+
+  for i in range(left + 1, right):
+    if sequence[i - 1] > sequence[i]:
+      temp_element = sequence[i]
+      sequence[i] = sequence[i - 1]
+      sequence[i - 1] = temp_element
+  right -= 1
+  for i in range(right - 1, left, -1):
+    if sequence[i - 1] > sequence[i]:
+      temp_element = sequence[i]
+      sequence[i] = sequence[i - 1]
+      sequence[i - 1] = temp_element
+  left += 1
+
+  return shaker_sort_recursively(sequence, left, right)
 
 
 """
