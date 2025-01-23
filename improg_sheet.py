@@ -1004,7 +1004,7 @@ def selection_sorting_algorithm():
 def intersection_sorting_algorithm():
   def insertion_sort(sequence: list[int]) -> None:
     for i in range(1, len(sequence)):
-        value = i
+        value = sequence[i]
         j = i
         while j > 0 and sequence[j - 1] > value:
             sequence[j] = sequence[j - 1]
@@ -1076,7 +1076,7 @@ def quick_sorting_algorithm():
     quicksort(sequence, start, left - 1)
     quicksort(sequence, left, end)
 
-# Shell sort (Varaition on insertion sort)
+# Shell sort (Variation on insertion sort)
 def shell_sorting_algorithm():
   def swap_elements(sequence: list[int], x: int, y: int) -> None:
     temp_element = sequence[x]
@@ -1155,6 +1155,67 @@ def radix_sorting_algorithm():
     while factor < MAX_NUMBER:
       counting_sort(sequence, factor)
       factor *= RADIX
+
+"""
+Sorting algorithms recursively:
+
+Notes: 
+  Mergesort is already recursive
+  Quicksort is already recursive
+"""
+
+def selection_sort_recursive_1(x, index = 0):
+  if index + 1 == len(x):
+    return x #-> Or return nothing because the original x is already modified
+  
+  temp = min(x[index:])
+  smallest_element_index = x.index(temp)
+  x[smallest_element_index] = x[index]
+  x[index] = temp
+
+  return selection_sort_recursive_1(x, index + 1)
+
+def selection_sort_recursive_2(x, index = 0):
+  if index + 1 == len(x):
+    return x #-> Or return nothing because the original x is already modified
+
+  minimum_index = index
+  for j in range(index + 1, len(x)):
+    if x[j] < x[minimum_index]:
+      minimum_index = j
+
+  temp_element = x[index]
+  x[index] = x[minimum_index]
+  x[minimum_index] = temp_element
+
+  return selection_sort_recursive_2(x, index + 1)
+
+def insertion_sort_recursive(x, index = 1):
+  if index == len(x):
+    return x #-> Or return nothing because the original x is already modified
+  
+  value = x[index]
+  j = index
+  while j > 0 and x[j - 1] > value:
+    x[j] = x[j - 1]
+    j -= 1
+  x[j] = value
+
+  return insertion_sort_recursive(x, index + 1)
+
+def bubble_sort_recursive(x, index = 0):
+  right = len(x) - index
+  if right == 1:
+    return x #-> Or return nothing because the original x is already modified
+  
+  for i in range(1, right):
+    if x[i - 1] > x[i]:
+      temp_element = x[i]
+      x[i] = x[i - 1]
+      x[i - 1] = temp_element
+
+  return bubble_sort_recursive(x, index + 1)
+
 
 """
 Recursion General Functions:
