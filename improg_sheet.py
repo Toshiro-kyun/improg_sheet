@@ -1471,6 +1471,55 @@ If you are reading this before the exam and dont understand how the method works
 """
 
 """
+Function arguments:
+"""
+
+# Types you can define the parameter with
+def types():
+  None
+  int
+  float
+  list #-> You can define stuff in the list like: list[int] or list[list[int]]
+  set #-> You can define stuff in the set like: set[int]
+  tuple #-> You can define stuff in the tuple like: tuple[int, int]
+  dict #-> You can define the key and value type of a dict with format: dict[key, value]. So for example: dict[str, int]
+  any #-> anything
+  iter #-> iterable
+
+
+# Define a parameter
+def function(parameter):
+  pass
+
+# Define multiple parameters
+def function(parameter1, parameter2):
+  pass
+
+# Define result 
+result = int #-> just a placeholder, you should remove this and just replace the value in the function
+def function() -> result:
+  pass
+
+# Define type of argument passed for parameter
+def function(parameter: type):
+  pass
+
+# Define standard value for parameter
+standard = 0 #-> just a placeholder, you should remove this and just replace the value in the function
+def function(parameter = standard):
+  pass
+
+#Define type and standard value of parameter
+def function(parameter: type = standard):
+  pass
+
+#All together
+def function(parameter: type = standard) -> result:
+  pass
+
+
+
+"""
 Methods
 
 !!!Note that unless "Returns" is included, the methods do not return any value but modify the original !!
