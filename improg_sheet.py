@@ -1402,6 +1402,92 @@ def infix_to_postfix(exp):
   return helper(list(exp))
 
 """
+Classes:
+"""
+
+# Create a class
+def create_class():
+  class Person:
+    pass
+
+# Create an object
+def create_object():
+  class Person:
+    pass
+
+  p1 = Person()
+
+# Assign property to object:
+def assign_property():
+  class Person:
+    x = "property" #-> Replace by whatever property you want
+
+  p1 = Person()
+  print(p1.x) #-> Prints "property"
+
+# Execution when class is made
+def init():
+  class Person:
+    def __init__(self, name, age):
+      self.name = name
+      self.age = age
+  
+  p1 = Person("John", 36)
+  print(p1.name, p1.age)
+
+  #Note: self is usually the first argument, which refers to the class itself
+  #Note: __init__ is run whenever a class is initialized/made
+
+# String representation
+def str_representation():
+  class Person:
+    def __init__(self, name, age):
+      self.name = name
+      self.age = age
+    
+    def __str__(self):
+      return f"{self.name}({self.age})"
+  
+  p1 = Person("John", 36)
+  print(p1) #-> Prints John(36), instead of "<__main__.Person object at 0x...>"
+
+# Function of class
+def class_function():
+  class Person:
+    def __init__(self, name, age):
+      self.name = name
+      self.age = age
+    
+    def func(self):
+      print(f"{self.name}")
+  
+  p1 = Person("John", 36)
+  p1.func() #-> Prints "John"
+
+# Deleting properties
+def class_function():
+  class Person:
+    def __init__(self, name, age):
+      self.name = name
+      self.age = age
+  
+  p1 = Person("John", 36)
+  
+  del p1.age #-> Deletes property age
+
+# Deleting object
+def class_function():
+  class Person:
+    def __init__(self, name, age):
+      self.name = name
+      self.age = age
+  
+  p1 = Person("John", 36)
+  
+  del p1 #-> Deletes p1
+
+
+"""
 Methods on how to solve the multiple choice questions:
 
 There are two forms of these questions, the ones that ask you to find the process in which you find the answer and the ones that ask you
