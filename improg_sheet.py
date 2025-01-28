@@ -987,7 +987,6 @@ def selection_sorting_algorithm():
     sequence[x] = sequence[y]
     sequence[y] = temp_element
 
-
   def selection_sort(sequence: list[int]) -> None:
     for i in range(len(sequence)):
         minimum_index = i
@@ -995,7 +994,42 @@ def selection_sorting_algorithm():
             if sequence[j] < sequence[minimum_index]:
                 minimum_index = j
         swap_elements(sequence, i, minimum_index)
+#Recursive selection sort: 
 
+# Return minimum index
+def minIndex( a , i , j ):
+    if i == j:
+        return i
+         
+    # Find minimum of remaining elements
+    k = minIndex(a, i + 1, j)
+     
+    # Return minimum of current 
+    # and remaining.
+    return (i if a[i] < a[k] else k)
+     
+# Recursive selection sort. n is 
+# size of a[] and index is index of 
+# starting element.
+def recurSelectionSort(a, n, index = 0):
+ 
+    # Return when starting and 
+    # size are same
+    if index == n:
+        return -1
+         
+    # calling minimum index function 
+    # for minimum index
+    k = minIndex(a, index, n-1)
+     
+    # Swapping when index and minimum 
+    # index are not same
+    if k != index:
+        a[k], a[index] = a[index], a[k]
+         
+    # Recursively calling selection
+    # sort function
+    recurSelectionSort(a, n, index + 1)
 #Insertion sort
 def intersection_sorting_algorithm():
   def insertion_sort(sequence: list[int]) -> None:
@@ -1006,6 +1040,25 @@ def intersection_sorting_algorithm():
             sequence[j] = sequence[j - 1]
             j -= 1
         sequence[j] = value
+def insertion_sort_recursive(arr, n=None):
+    if n is None:
+        n = len(arr)
+    
+    if n <= 1:
+        return arr
+    
+    insertion_sort_recursive(arr, n - 1)
+    
+    last = arr[n - 1]
+    j = n - 2
+    
+    while j >= 0 and arr[j] > last:
+        arr[j + 1] = arr[j]
+        j -= 1
+    
+    arr[j + 1] = last
+    return arr  # Explicitly return the array
+
 
 #Bubble sort
 def bubble_sorting_algorithm():
@@ -1019,6 +1072,20 @@ def bubble_sorting_algorithm():
       for i in range(1, right):
         if sequence[i - 1] > sequence[i]:
           swap_elements(sequence, i, i - 1)
+          
+#Bubble sort recursive implementation
+def bubble_sort_recursive(arr, n=None):
+    if n is None:
+        n = len(arr)
+    
+    if n == 1:
+        return
+    
+    for i in range(n - 1):
+        if arr[i] > arr[i + 1]:
+            arr[i], arr[i + 1] = arr[i + 1], arr[i]
+    
+    bubble_sort_recursive(arr, n - 1)
 
 #Merge sort
 def merge_sorting_algorithm():
@@ -1045,7 +1112,37 @@ def merge_sorting_algorithm():
     midpoint = len(sequence) // 2
     sequence = merge_sort(sequence[:midpoint]) + merge_sort(sequence[midpoint:])
     return merge(sequence, midpoint)
-  
+#merge sort recursive implementation
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        left = arr[:mid]
+        right = arr[mid:]
+        
+        merge_sort(left)
+        merge_sort(right)
+        
+        i = j = k = 0
+        
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                arr[k] = left[i]
+                i += 1
+            else:
+                arr[k] = right[j]
+                j += 1
+            k += 1
+        
+        while i < len(left):
+            arr[k] = left[i]
+            i += 1
+            k += 1
+        
+        while j < len(right):
+            arr[k] = right[j]
+            j += 1
+            k += 1
+      
 # Quick sort
 def quick_sorting_algorithm():
   def swap_elements(sequence: list[int], x: int, y: int) -> None:
@@ -1071,6 +1168,18 @@ def quick_sorting_algorithm():
     swap_elements(sequence, start, left - 1)
     quicksort(sequence, start, left - 1)
     quicksort(sequence, left, end)
+    
+#Quick sort recursive implementation
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+
+    return quick_sort(left) + middle + quick_sort(right)
 
 # Shell sort (Variation on insertion sort)
 def shell_sorting_algorithm():
