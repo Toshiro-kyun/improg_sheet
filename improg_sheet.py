@@ -1425,6 +1425,24 @@ def generate_permutations(nums):
     for perm in generate_permutations(rest):
       permutations.append([nums[i]] + perm)
   return permutations
+#Generate all permutations of a string of a given length and alphabet
+  def all_palindromes(k: int) -> list[str]:
+    """
+    Makes a list of all palindromes of a given length, using lowercase letters only.
+
+    :param k: length of the palindromes
+    :return: list of palindromes of length k
+    """
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    
+    if k == 0:
+        return [""]
+    elif k == 1:
+        return list(alphabet)
+    else:
+        smaller_palindromes = all_palindromes(k - 2)
+        return [char + word + char for char in alphabet for word in smaller_palindromes]
+
 
 # Vignere cipher
 # Explanation: The Vigenère cipher is a method of encrypting alphabetic text where each letter of the plaintext is encoded with a different Caesar cipher, whose increment is determined by the corresponding letter of another text, the key.
