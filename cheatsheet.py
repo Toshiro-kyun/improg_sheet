@@ -97,7 +97,7 @@ def check_prime(number):
 #Function that determines whether a number is divisble by each of its digits:
 def digit_divisible(number: int):
   for i in str(number):
-    if number % int(I) != 0:
+    if number % int(i) != 0:
         return False
     else:
         return True
@@ -137,6 +137,17 @@ def number_of_quadratic_solutions(a,b,c):
 def shifting_with_wrapping(c, shift):
   base = "a" # You can change this base
   return chr((ord(c) - ord(base) + shift) % 26 + ord(base))
+
+#Function that finds the greatest common divisor of 2 numbers:
+def gcd(a, b, c, d):
+  #Option 1: Use math module
+  math.gcd(a, b, c,d)
+
+  #Option 2: use a function
+  def calc_gcd(a, b):
+    while b:
+      a, b = b, a % b
+    return a
 
 #Function that recursively exponentiates a number to a given power:
 def exponentiation(a,b):
