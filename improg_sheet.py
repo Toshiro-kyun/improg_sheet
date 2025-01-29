@@ -828,19 +828,20 @@ def letter_count_dict():
     print(letter + ": " + str(letter_counts[letter]))
 
   #Maximum of sequence using tuples:
-def get_maximum(seq: list[int]) -> (int, int):
-  maximum_value: int = seq[0]
-  maximum_index: int = 0
-  for i, value in enumerate(seq):
-    if value > maximum_value:
-      maximum_value = value
-      maximum_index = i
-  return maximum_index, maximum_value
 
+def maximum_of_sequence():
+  def get_maximum(seq: list[int]) -> (int, int):
+    maximum_value: int = seq[0]
+    maximum_index: int = 0
+    for i, value in enumerate(seq):
+      if value > maximum_value:
+        maximum_value = value
+        maximum_index = i
+    return maximum_index, maximum_value
 
-sequence: list[int] = [int(term) for term in input().split()]
-index, value = get_maximum(sequence)
-print("The maximum value of", value, "is achieved at position", index)
+  sequence: list[int] = [int(term) for term in input().split()]
+  index, value = get_maximum(sequence)
+  print("The maximum value of", value, "is achieved at position", index)
 
 #Week 11:
 
@@ -923,63 +924,58 @@ def tricky_cubes():
 
   #Week 12
     #Flipping coins:
+def flipping_coins():
+  import math
 
-import math
-
-n = int(input())
-print(n - math.isqrt(n))
+  n = int(input())
+  print(n - math.isqrt(n))
 
     #Scheduling nightmare:
-
-def get_optimal_assignment_value(matrix: list[list], current_line = 0, taken: list = []):
+def scheduling_nightmare():
+  def get_optimal_assignment_value(matrix: list[list], current_line = 0, taken: list = []):
     """
     Returns the optimal satisfaction given a matrix of satisfactions
     :param matrix: Matrix of individual (row) satisfactions for being assigned tasks (column),
-                   or X if satisfaction is minus infinity
+                  or X if satisfaction is minus infinity
     :param current_line: Current individual being assigned a task
     :param taken: Which tasks have already been taken
     :return:
     """
     if current_line >= len(matrix):
-        return 0
+      return 0
     current_best = 0
     possible = False
     for option in range(len(matrix[current_line])):
-        # For each possible task
-        if option not in taken and matrix[current_line][option] != "X":
-            # If the task is not taken, and assignment of
-            # individual current_line to option is possible,
-            # find the best assignment of future individuals
-            value = get_optimal_assignment_value(matrix, current_line + 1, taken + [option])
-            if value >= 0 and value + matrix[current_line][option] >= current_best:
-                # If such an assignment of future individuals is possible
-                # and leads to a better satisfaction than currently known,
-                # update the satisfaction value
-                possible = True
-                current_best = value + matrix[current_line][option]
+      # For each possible task
+      if option not in taken and matrix[current_line][option] != "X":
+        # If the task is not taken, and assignment of
+        # individual current_line to option is possible,
+        # find the best assignment of future individuals
+        value = get_optimal_assignment_value(matrix, current_line + 1, taken + [option])
+        if value >= 0 and value + matrix[current_line][option] >= current_best:
+          # If such an assignment of future individuals is possible
+          # and leads to a better satisfaction than currently known,
+          # update the satisfaction value
+          possible = True
+          current_best = value + matrix[current_line][option]
     if possible:
-        # If we have found a possible assignment,
-        # return the best we found
-        return current_best
+      # If we have found a possible assignment,
+      # return the best we found
+      return current_best
     # Impossible assignment reached
     return -1
 
-matrix = []
-matrix.append([value if value == "X" else int(value) for value in input().split()])
-while len(matrix) < len(matrix[0]):
+  matrix = []
+  matrix.append([value if value == "X" else int(value) for value in input().split()])
+  while len(matrix) < len(matrix[0]):
     matrix.append([value if value == "X" else int(value) for value in input().split()])
 
-best_value = get_optimal_assignment_value(matrix)
-if best_value >= 0:
+  best_value = get_optimal_assignment_value(matrix)
+  if best_value >= 0:
     print(best_value)
-else:
+  else:
     print("IMPOSSIBLE")
   
-def generate_subsets(s):
-    if s == "":
-        return [""]
-    smaller_subsets = generate_subsets(s[1:])
-    return smaller_subsets + [s[0] + subset for subset in smaller_subsets]
 """
 Sorting algorithms:
 !! Assume worst time-complexity !!
@@ -1002,7 +998,6 @@ def selection_sorting_algorithm():
     sequence[x] = sequence[y]
     sequence[y] = temp_element
 
-
   def selection_sort(sequence: list[int]) -> None:
     for i in range(len(sequence)):
         minimum_index = i
@@ -1010,17 +1005,72 @@ def selection_sorting_algorithm():
             if sequence[j] < sequence[minimum_index]:
                 minimum_index = j
         swap_elements(sequence, i, minimum_index)
+#Recursive selection sort: 
 
+# Return minimum index
+def minIndex( a , i , j ):
+    if i == j:
+        return i
+         
+    # Find minimum of remaining elements
+    k = minIndex(a, i + 1, j)
+     
+    # Return minimum of current 
+    # and remaining.
+    return (i if a[i] < a[k] else k)
+     
+# Recursive selection sort. n is 
+# size of a[] and index is index of 
+# starting element.
+def recurSelectionSort(a, n, index = 0):
+ 
+    # Return when starting and 
+    # size are same
+    if index == n:
+        return -1
+         
+    # calling minimum index function 
+    # for minimum index
+    k = minIndex(a, index, n-1)
+     
+    # Swapping when index and minimum 
+    # index are not same
+    if k != index:
+        a[k], a[index] = a[index], a[k]
+         
+    # Recursively calling selection
+    # sort function
+    recurSelectionSort(a, n, index + 1)
 #Insertion sort
 def intersection_sorting_algorithm():
   def insertion_sort(sequence: list[int]) -> None:
     for i in range(1, len(sequence)):
-        value = i
+        value = sequence[i]
         j = i
         while j > 0 and sequence[j - 1] > value:
             sequence[j] = sequence[j - 1]
             j -= 1
         sequence[j] = value
+#Recursive implementation of insertion sort
+def insertion_sort_recursive(arr, n=None):
+    if n is None:
+        n = len(arr)
+    
+    if n <= 1:
+        return arr
+    
+    insertion_sort_recursive(arr, n - 1)
+    
+    last = arr[n - 1]
+    j = n - 2
+    
+    while j >= 0 and arr[j] > last:
+        arr[j + 1] = arr[j]
+        j -= 1
+    
+    arr[j + 1] = last
+    return arr  # Explicitly return the array
+
 
 #Bubble sort
 def bubble_sorting_algorithm():
@@ -1034,6 +1084,20 @@ def bubble_sorting_algorithm():
       for i in range(1, right):
         if sequence[i - 1] > sequence[i]:
           swap_elements(sequence, i, i - 1)
+          
+#Bubble sort recursive implementation
+def bubble_sort_recursive(arr, n=None):
+    if n is None:
+        n = len(arr)
+    
+    if n == 1:
+        return
+    
+    for i in range(n - 1):
+        if arr[i] > arr[i + 1]:
+            arr[i], arr[i + 1] = arr[i + 1], arr[i]
+    
+    bubble_sort_recursive(arr, n - 1)
 
 #Merge sort
 def merge_sorting_algorithm():
@@ -1060,7 +1124,37 @@ def merge_sorting_algorithm():
     midpoint = len(sequence) // 2
     sequence = merge_sort(sequence[:midpoint]) + merge_sort(sequence[midpoint:])
     return merge(sequence, midpoint)
-  
+#merge sort recursive implementation
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        left = arr[:mid]
+        right = arr[mid:]
+        
+        merge_sort(left)
+        merge_sort(right)
+        
+        i = j = k = 0
+        
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                arr[k] = left[i]
+                i += 1
+            else:
+                arr[k] = right[j]
+                j += 1
+            k += 1
+        
+        while i < len(left):
+            arr[k] = left[i]
+            i += 1
+            k += 1
+        
+        while j < len(right):
+            arr[k] = right[j]
+            j += 1
+            k += 1
+      
 # Quick sort
 def quick_sorting_algorithm():
   def swap_elements(sequence: list[int], x: int, y: int) -> None:
@@ -1086,8 +1180,20 @@ def quick_sorting_algorithm():
     swap_elements(sequence, start, left - 1)
     quicksort(sequence, start, left - 1)
     quicksort(sequence, left, end)
+    
+#Quick sort recursive implementation
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
 
-# Shell sort (Varaition on insertion sort)
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+
+    return quick_sort(left) + middle + quick_sort(right)
+
+# Shell sort (Variation on insertion sort)
 def shell_sorting_algorithm():
   def swap_elements(sequence: list[int], x: int, y: int) -> None:
     temp_element = sequence[x]
@@ -1168,6 +1274,106 @@ def radix_sorting_algorithm():
       factor *= RADIX
 
 """
+Sorting algorithms recursively:
+
+Notes: 
+  Mergesort is already recursive
+  Quicksort is already recursive
+
+"""
+
+def selection_sort_recursive_1(sequence: list[int], index: int = 0):
+  if index + 1 == len(sequence):
+    return sequence #-> Or return nothing because the original sequence is already modified
+  
+  temp = min(sequence[index:])
+  smallest_element_index = sequence.index(temp)
+  sequence[smallest_element_index] = sequence[index]
+  sequence[index] = temp
+
+  return selection_sort_recursive_1(sequence, index + 1)
+
+def selection_sort_recursive_2(sequence: list[int], index: int = 0):
+  if index + 1 == len(sequence):
+    return sequence #-> Or return nothing because the original sequence is already modified
+
+  minimum_index = index
+  for j in range(index + 1, len(x)):
+    if sequence[j] < sequence[minimum_index]:
+      minimum_index = j
+
+  temp_element = sequence[index]
+  sequence[index] = sequence[minimum_index]
+  sequence[minimum_index] = temp_element
+
+  return selection_sort_recursive_2(sequence, index + 1)
+
+def insertion_sort_recursive(sequence: list[int], index: int = 1):
+  if index == len(sequence):
+    return sequence #-> Or return nothing because the original sequence is already modified
+  
+  value = sequence[index]
+  j = index
+  while j > 0 and sequence[j - 1] > value:
+    sequence[j] = sequence[j - 1]
+    j -= 1
+  sequence[j] = value
+
+  return insertion_sort_recursive(sequence, index + 1)
+
+def bubble_sort_recursive(sequence: list[int], index: int = 0):
+  right = len(sequence) - index
+  if right == 1:
+    return sequence #-> Or return nothing because the original sequence is already modified
+  
+  for i in range(1, right):
+    if sequence[i - 1] > sequence[i]:
+      temp_element = sequence[i]
+      sequence[i] = sequence[i - 1]
+      sequence[i - 1] = temp_element
+
+  return bubble_sort_recursive(sequence, index + 1)
+
+def shell_sort_recursively(sequence: list[int], gap: int = -1):
+  if gap < 0:
+    gap = len(sequence) // 2
+  elif gap == 0:
+    return sequence #-> Or return nothing because the original sequence is already modified
+
+  for position in range(gap, len(sequence)):
+    i = position
+    while i >= gap and sequence[i - gap] > sequence[i]:
+      temp_element = sequence[i - gap]
+      sequence[i - gap] = sequence[i]
+      sequence[i] = temp_element
+      i -= gap
+  
+  return shell_sort_recursively(sequence, gap // 2)
+
+def shaker_sort_recursively(sequence: list[int], left: int = 0, right: int = -1):
+  if right < 0:
+    right = len(sequence)
+
+  if left >= right:
+    return sequence
+
+  for i in range(left + 1, right):
+    if sequence[i - 1] > sequence[i]:
+      temp_element = sequence[i]
+      sequence[i] = sequence[i - 1]
+      sequence[i - 1] = temp_element
+  right -= 1
+  for i in range(right - 1, left, -1):
+    if sequence[i - 1] > sequence[i]:
+      temp_element = sequence[i]
+      sequence[i] = sequence[i - 1]
+      sequence[i - 1] = temp_element
+  left += 1
+
+  return shaker_sort_recursively(sequence, left, right)
+
+
+"""
 Recursion General Functions:
 """
 
@@ -1230,6 +1436,24 @@ def generate_permutations(nums):
     for perm in generate_permutations(rest):
       permutations.append([nums[i]] + perm)
   return permutations
+#Generate all permutations of a string of a given length and alphabet
+  def all_palindromes(k: int) -> list[str]:
+    """
+    Makes a list of all palindromes of a given length, using lowercase letters only.
+
+    :param k: length of the palindromes
+    :return: list of palindromes of length k
+    """
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    
+    if k == 0:
+        return [""]
+    elif k == 1:
+        return list(alphabet)
+    else:
+        smaller_palindromes = all_palindromes(k - 2)
+        return [char + word + char for char in alphabet for word in smaller_palindromes]
+
 
 # Vignere cipher
 # Explanation: The Vigenère cipher is a method of encrypting alphabetic text where each letter of the plaintext is encoded with a different Caesar cipher, whose increment is determined by the corresponding letter of another text, the key.
@@ -1317,6 +1541,92 @@ def infix_to_postfix(exp):
   return helper(list(exp))
 
 """
+Classes:
+"""
+
+# Create a class
+def create_class():
+  class Person:
+    pass
+
+# Create an object
+def create_object():
+  class Person:
+    pass
+
+  p1 = Person()
+
+# Assign property to object:
+def assign_property():
+  class Person:
+    x = "property" #-> Replace by whatever property you want
+
+  p1 = Person()
+  print(p1.x) #-> Prints "property"
+
+# Execution when class is made
+def init():
+  class Person:
+    def __init__(self, name, age):
+      self.name = name
+      self.age = age
+  
+  p1 = Person("John", 36)
+  print(p1.name, p1.age)
+
+  #Note: self is usually the first argument, which refers to the class itself
+  #Note: __init__ is run whenever a class is initialized/made
+
+# String representation
+def str_representation():
+  class Person:
+    def __init__(self, name, age):
+      self.name = name
+      self.age = age
+    
+    def __str__(self):
+      return f"{self.name}({self.age})"
+  
+  p1 = Person("John", 36)
+  print(p1) #-> Prints John(36), instead of "<__main__.Person object at 0x...>"
+
+# Function of class
+def class_function():
+  class Person:
+    def __init__(self, name, age):
+      self.name = name
+      self.age = age
+    
+    def func(self):
+      print(f"{self.name}")
+  
+  p1 = Person("John", 36)
+  p1.func() #-> Prints "John"
+
+# Deleting properties
+def class_function():
+  class Person:
+    def __init__(self, name, age):
+      self.name = name
+      self.age = age
+  
+  p1 = Person("John", 36)
+  
+  del p1.age #-> Deletes property age
+
+# Deleting object
+def class_function():
+  class Person:
+    def __init__(self, name, age):
+      self.name = name
+      self.age = age
+  
+  p1 = Person("John", 36)
+  
+  del p1 #-> Deletes p1
+
+
+"""
 Methods on how to solve the multiple choice questions:
 
 There are two forms of these questions, the ones that ask you to find the process in which you find the answer and the ones that ask you
@@ -1384,6 +1694,55 @@ Hopefullt this helps clear out some stuff, if you are reading this during the ex
 If you are reading this before the exam and dont understand how the method works, contact ricardo@rubert.es
 ---------------------------------------------------------------
 """
+
+"""
+Function arguments:
+"""
+
+# Types you can define the parameter with
+def types():
+  None
+  int
+  float
+  list #-> You can define stuff in the list like: list[int] or list[list[int]]
+  set #-> You can define stuff in the set like: set[int]
+  tuple #-> You can define stuff in the tuple like: tuple[int, int]
+  dict #-> You can define the key and value type of a dict with format: dict[key, value]. So for example: dict[str, int]
+  any #-> anything
+  iter #-> iterable
+
+
+# Define a parameter
+def function(parameter):
+  pass
+
+# Define multiple parameters
+def function(parameter1, parameter2):
+  pass
+
+# Define result 
+result = int #-> just a placeholder, you should remove this and just replace the value in the function
+def function() -> result:
+  pass
+
+# Define type of argument passed for parameter
+def function(parameter: type):
+  pass
+
+# Define standard value for parameter
+standard = 0 #-> just a placeholder, you should remove this and just replace the value in the function
+def function(parameter = standard):
+  pass
+
+#Define type and standard value of parameter
+def function(parameter: type = standard):
+  pass
+
+#All together
+def function(parameter: type = standard) -> result:
+  pass
+
+
 
 """
 Methods
@@ -1513,3 +1872,30 @@ def set_methods():
    set.symmetric_difference_update() #-> Insert symmetric differences from set and set2
    set.union(set2) #-> Returns a set with union of set and set2
    set.update(set2) #-> Update set with union of this set and set2
+
+#Regex pattern matching sequences:
+"""
+Metacharacter	Description	Example
+^	Matches the start of text, or the start of a line, depending on the settings of the regex engine.	^a only matches the first “a” in “a match is made”
+$	Matches the end of text, or the end of a line, depending on the settings of the regex engine.	!$ only matches the second “!” in “Hello! World!”
+.	Matches any one character.	. matches “c”, “a” and “t” in “cat”
+*	Matches the preceding element zero or more times.	co*t matches “ct”, “cot” and “coot”
++	Matches the preceding element one or more times.	co+t matches “cot”, “coot” but not “ct”
+?	Matches the preceding element zero or one time.	co?t matches “ct”, “cot” but not “coot”
+{n}	Matches the preceding element exactly n times.	co{2}t matches “coot” but not “cot” or “cooot”
+{,max}	Matches the preceding element zero to max times.	co{,2]t matches “ct”, “cot”, “coot” but not “cooot”
+{min,}	Matches the preceding element min or more times.	co{2,}t matches “coot” and “cooot” but not “cot”
+{m,n}	Matches the preceding element at least m and not more than n times.	co{2,3}t matches “coot” and “cooot” but not “cot”
+[ ]	Matches the characters inside the brackets. Can also specify ranges of characters such as [a-z].	[bcm]at matches “cat”, “bat” and “mat”
+[^ ]	Matches characters not inside the brackets. Can also specify ranges of characters such as [^a-z].	b[^a]t matches “bit”, “bot”, and “but” but not “bat”
+|	Matches the pattern on the right of the | or the pattern on the left.	yes|no matches both “yes” and “no”
+( )	Groups a pattern together and marks it for future reference	(ca|bi)t matches “cat” and “bit”
+\w	Matches alphanumeric characters and “_“.	\w+ matches “Hello” and “World” in “Hello World!”
+\W	Matches non-word characters.	\W matches the space and “!” in “Hello World!”
+\b	Matches word boundaries.	o\b matches the first “o” in “Hello World!”
+\B	Matches non-word boundaries.	o\B matches the second “o” in “Hello World!”
+\d	Matches a digit character.	\d+ matches “123” in “abc123”
+\D	Matches a non-digit character.	\D+ matches “abc” in “abc123”
+\s	Matches a whitespace character.	\s matches the space in “Hello World!”
+\S	Matches a non-whitespace character.	\S+ matches “Hello” and “World!” in “Hello World!”
+"""
