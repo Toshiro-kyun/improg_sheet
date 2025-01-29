@@ -1040,6 +1040,7 @@ def intersection_sorting_algorithm():
             sequence[j] = sequence[j - 1]
             j -= 1
         sequence[j] = value
+#Recursive implementation of insertion sort
 def insertion_sort_recursive(arr, n=None):
     if n is None:
         n = len(arr)
