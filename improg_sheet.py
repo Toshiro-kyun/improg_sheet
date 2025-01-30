@@ -1952,5 +1952,3 @@ $	Matches the end of text, or the end of a line, depending on the settings of th
 \s	Matches a whitespace character.	\s matches the space in “Hello World!”
 \S	Matches a non-whitespace character.	\S+ matches “Hello” and “World!” in “Hello World!”
 """
-=======
->>>>>>> d528735d8842b72dd9da9fbee08c6d928c8528e0
