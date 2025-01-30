@@ -1372,7 +1372,6 @@ def sum_to_n(n):
     return 0
   return n + sum_to_n(n-1)
 
-
 # Amount of characters in a string
 def count_characters(s):
   if s == "":
