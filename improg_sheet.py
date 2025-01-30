@@ -1661,6 +1661,23 @@ Merge sort:
 3. Merge:  The sorted subarrays are merged back together in sorted order. The process continues until all elements from both subarrays have been merged. 
 """
 
+"""
+Counting sort:
+In essence, counting sort does this:
+1. Creates an empty array of length n where n is the biggest number you want to sort
+2. Goes through the list you want to sort linearly and adds 1 to the index of that value in the empty array.
+3. When its done, it goes linearly through the array you created at the beginning and whenever it finds a number, it adds that many of that index to the sorted array.
+4. When you reach the end, the array is sorted
+"""
+
+"""
+Radix sort:
+1. Creates an empty array of length 9 and assigns them to 0.
+2. It does counting sort with the first digit of the number, so if you had the number 69, it would do it with 9.
+3. After one pass, its sorted all of the numbers according to their last digit, now it repeats this with the second digit
+4. this repeats until they are all sorted
+"""
+
 
 """
 Methods on how to solve the multiple choice questions:
