@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
 Summary of Programming Code for Imperative Programming Course for BSc Artificial Intelligence
 Feel free to commit/edit this document
