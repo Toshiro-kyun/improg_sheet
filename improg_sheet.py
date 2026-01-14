@@ -162,6 +162,18 @@ def factorial(x):
     return 1
   else:
     return x * factorial(x-1)
+    
+
+def main():
+  print(recursive_combination([1, 2, 3])
+
+# Function that recursively finds all possible combinations of elements in a list. E.g [1, 2, 3] would return [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]        
+def recursive_combination(arr):
+  if l:
+    result = combinations(l[:-1])
+    return result + [c + [l[-1]] for c in result]
+  else:
+    return [[]]
 
 def main():
   print(recursive_permutation("happy"))
